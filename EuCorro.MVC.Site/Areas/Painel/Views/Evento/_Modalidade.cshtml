@@ -1,0 +1,190 @@
+﻿@model EuCorro.Domain.Models.ModalidadeEvento
+
+@*@{
+        @Model.EventoId = ViewBag.NovoEvento;
+    }*@
+
+<div class="box box-default box-solid">
+    <div class="box-header with-border">
+        @*<h3 class="box-title">Nova Modalidade</h3>*@
+        <h3 class="box-title" data-bind="text: TipoModalidade"></h3>
+    </div>
+    <div class="box-body">
+        <div class="form" data-bind="with modalidade">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="text-center">@TempData["SuccessMessage"]</h4>
+                </div>
+            }
+            <div class="row">
+
+                @Html.Hidden("ModalidadeEventoId", null, new { @data_bind = "value: ModalidadeEventoId" })
+                @Html.Hidden("EventoId", null, new { @data_bind = "value: EventoId" })
+
+                <div class="form-group col-md-3">
+                    @Html.Label("Modalidade", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("ModalidadeId", new SelectList(ViewBag.Modalidade, "ModalidadeId", "Nome"), "Selecione o Modalidade...", new { @class = "form-control", @data_bind = "value: ModalidadeId" })
+                    @Html.ValidationMessage("ModalidadeId", "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-3">
+                    @Html.Label("Modalidade é revezamento?", htmlAttributes: new { @class = "control-label" })<br />
+                    @Html.CheckBox("Reverzamento", new { @class = "form-control Reverzamento", @data_bind = "value: Reverzamento" })
+                    @Html.ValidationMessage("Reverzamento", "", new { @class = "text-danger" })
+                </div>
+                <div id="equipe" class="form-group col-md-3 equipe" style="display: none">
+                    @Html.Label("Quantos atletas por equipe?", htmlAttributes: new { @class = "control-label" })
+                    @*<imput for="AtletasPorEquipe" class="form-control" type="text" data-bind="value: AtletasPorEquipe" />*@
+                    @Html.TextBox("AtletasPorEquipe", null, new { @class = "form-control", @type = "optional", @data_bind = "value: AtletasPorEquipe" })
+                    @Html.ValidationMessage("AtletasPorEquipe", "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-3">
+                    @Html.Label("Número de vagas", htmlAttributes: new { @class = "control-label" })
+                    @*<imput class="form-control" type="text" data-bind="value: Vagas" />*@
+                    @Html.TextBox("Vagas", null, new { @class = "form-control", @data_bind = "value: Vagas" })
+                    @Html.ValidationMessage("Vagas", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.Label("Intervalo de numeração para atletas", htmlAttributes: new { @class = "control -label" })
+                    <div class="row">
+                        <div class="col-md-6">
+                            @*<imput class="form-control" type="text" data-bind="value: NumeroInicial" />*@
+                            @Html.TextBox("NumeroInicial", null, new { @class = "form-control", @data_bind = "value: NumeroInicial" })
+                            @Html.ValidationMessage("NumeroInicial", "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-6">
+                            @*<imput class = "form-control" type="text" data-bind = "value: NumeroFinal" />*@
+                            @Html.TextBox("NumeroFinal", null, new { @class = "form-control", @data_bind = "value: NumeroFinal" })
+                            @Html.ValidationMessage("NumeroFinal", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    @Html.Label("Idade mínima", htmlAttributes: new { @class = "control -label" })
+                    @Html.TextBox("IdadeMin", null, new { @class = "form-control", @data_bind = "value: IdadeMin" })
+                    @Html.ValidationMessage("IdadeMin", "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-3">
+                    @Html.Label("Idade máxima", htmlAttributes: new { @class = "control -label" })
+                    @Html.TextBox("IdadeMax", null, new { @class = "form-control",  @data_bind = "value: IdadeMax" })
+                    @Html.ValidationMessage("IdadeMax", "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div id="foreach-binding" class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="bg-light-blue-gradient">
+                        <tr>
+                            <th colspan="6"><span>PREÇOS</span></th>
+                        </tr>
+                        <tr></tr>
+                    </thead>
+                    <tbody data-bind="foreach: ListaPrecos">
+                        <tr>
+                            <td>
+                                @Html.TextBox("DataIni", null, new { @class = "form-control datas", @data_binde = "DataIni", @placeholder = "Aparti do dia" })
+                            </td>
+                            <td>
+                                @Html.TextBox("HoraIni", null, new { @class = "form-control timepicker", @data_bind = "value: HoraIni", @placeholder = "Hora Início" })
+                            </td>
+                            <td>
+                                @Html.TextBox("DataFim", null, new { @class = "form-control datas", @data_binde = "DataFim", @placeholder = "Data Final" })
+                            </td>
+                            <td>
+                                @Html.TextBox("HoraFin", null, new { @class = "form-control timepicker", @data_bind = "value: HoraFin", @placeholder = "Encerramento" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Valor", null, new { @class = "form-control dinheiro", @data_bind = "value: Valor", @placeholder = "Valor" })
+                            </td>
+                            <td>
+                                @Html.TextBox("Desconto", null, new { @class = "form-control dinheiro", @data_bind = "value: Desconto", @placeholder = "Desconto" })
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" data-bind="click: $parent.removePreco">EXCLUIR</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <button class="btn btn-default" data-bind='click: addPreco' title="Adicionar Preço"><i class="fa fa-plus"></i> Preço</button>
+                </div>
+            </div>
+            @*<div id="foreach-binding-Preco" class="table-responsive">
+                    <table id="ListaPrecos" class="table">
+                        <thead class="bg-light-blue-gradient">
+                            <tr>
+                                <th colspan="12"><span>PREÇOS</span></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: ListaPrecos">
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="form-group col-lg-2 col-md-12 col-xs-12">
+                                            @Html.Label("Apartir do dia", new { @class = "control-label " })
+                                            <div class="input-append input-group date">
+                                                <span class="input-group-addon add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                @Html.TextBox("DataIni", null, new { @class = "form-control DataEvento", @data_binde = "DataIni", @nome = "DataIni" })
+                                            </div>
+                                        </div>
+                                        <div class="bootstrap-timepicker col-lg-2 col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                @Html.Label("Hora do Início", new { @class = "control-label" })
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    @Html.TextBox("HoraIni", null, new { @class = "form-control timepicker", @name = "HoraIni", @data_bind = "value: HoraIni" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-md-12 col-xs-12">
+                                            @Html.Label("Até o dia", new { @class = "control-label " })
+                                            <div class="input-append input-group date">
+                                                <span class="input-group-addon add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                                                @Html.TextBox("DataFin", null, new { @class = "form-control DataEvento", @data_binde = "DataFin", @nome = "DataFin" })
+                                            </div>
+                                        </div>
+                                        <div class="bootstrap-timepicker timepicker col-lg-2 col-md-12 col-xs-12">
+                                            <div class="form-group">
+                                                @Html.Label("Encerramento", new { @class = "control-label" })
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    @Html.TextBox("HoraFin", null, new { @class = "form-control timepicker", @name = "HoraFin", @data_bind = "value: HoraFin" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 col-xs-12">
+                                            @Html.Label("Valor", new { @class = "control-label" })
+                                            @Html.TextBox("Valor", null, new { @class = "form-control dinheiro", @name = "Valor", @data_bind = "value: Valor" })
+                                        </div>
+                                        <div class="col-lg-1 col-md-12 col-xs-12">
+                                            @Html.Label("Ação", new { @class = "control-label" })<br />
+                                            <button class="btn btn-sm btn-danger" style="bottom: 0px" data-bind="click: $root.removePreco" title="Remover da lista">EXCLUIR</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-left">
+                        <button type="button" class="btn btn-success" data-bind='click: addPreco'>Adicionar Preço</button>
+                    </div>
+                    <br />
+                </div>*@
+        </div>
+    </div>
+    <div id="msgErroModalidade" class="alert alert-danger hide text-center"><small><span></span></small></div>
+    <div class="box-footer">
+        <div class="form-group">
+            <div class="text-center">
+                <button class="btn btn-default btn-modalidade" @*data-bind='click: saveModalidade'*@>Salvar Registros</button>
+                <button class="btn btn-default btn-modalidade" @*data-bind='click: cacelModalidade'*@>Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

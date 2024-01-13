@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewBag.Title - EUCORRO - Assessoria Esportiva</title>
+
+    <!-- Le styles -->
+    @Styles.Render("~/website/css")
+    @Styles.Render("~/Content/css")
+
+</head>
+<body>
+    <section id="menu">
+        @Html.Partial("_Topo")
+    </section>
+
+    <section id="corpo" class="container body-content">
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Partial("_LoginPartial")
+        }
+        @RenderBody()
+    </section>
+
+    <footer class="main-footer">
+        @Html.Partial("_Rodape")
+    </footer>
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("menu", required: false)
+    @Scripts.Render("~/bootstrap/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

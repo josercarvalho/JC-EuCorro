@@ -1,0 +1,171 @@
+﻿@model IEnumerable<EuCorro.MVC.Site.ViewModels.imgParceirosViewModel>
+
+@{int contador = 0;}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="subtitle">PARCEIROS & CLIENTES</h3>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Section title -->
+                @*<div class="section-title">
+                    <h4><i class="fa fa-check-square-o"></i> &nbsp;Escolha sua marca</h4>
+                </div>*@
+                <div id="item-carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <!-- Image link -->
+                                        <a href="#">
+                                            <img src="~/Uploads/Parceiros/00-pmirante-255x140.jfif" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="#">
+                                            <img src="~/Uploads/Parceiros/01-ptjma-255x140.jfif" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="#">
+                                            <img src="~/Uploads/Parceiros/02-pampem-255x140.jfif" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="#">
+                                            <img src="~/Uploads/Parceiros/03-pvale-255x140.jfif" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="#">
+                                            <img src="~/Uploads/Parceiros/06-banner_chipbrasil.jpg" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="#">
+                                            <img src="~/Uploads/Parceiros/04-JC-Logo.png" class="img-responsive" width="279" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="#">
+                                            <img src="~/Uploads/Parceiros/05-Logo-Golden.png" class="img-responsive" width="170" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                @*<div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="#">
+                                            <img src="/marcas/olympikus.jpg" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                        @*<div class="item">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="/nav/0081/penalty">
+                                            <img src="/marcas/penalty.jpg" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="/nav/0091/puma">
+                                            <img src="/marcas/puma.jpg" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="/nav/0098/reebok">
+                                            <img src="/marcas/reebok.jpg" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="s-item">
+                                        <a href="/nav/0118/umbro">
+                                            <img src="/marcas/umbro.jpg" class="img-responsive" alt="" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                    <br />
+                    <!-- Controls -->
+                    <a class="left c-control" href="#item-carousel" data-slide="prev">
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                    <a class="right c-control" href="#item-carousel" data-slide="next">
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="well">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="item-carousel" class="carousel slide" data-ride="carousel">
+
+                </div>
+                @foreach (var image in Model)
+            {
+                    <div class="col-md-3 col-sm-6">
+                        @if (contador == 0)
+                {
+                            <div class="s-item active">
+                                <!-- Image link -->
+                                <a href="#">
+                                    <img src="@Url.Content("~/Uploads/Parceiros/" + image.ImagePath)" class="img-thumbnail img-responsive" alt="" />
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="s-item">
+                                }
+                                <!-- Image link -->
+                                <a href="#">
+                                    <img src="@Url.Content("~/Uploads/Parceiros/" + image.ImagePath)" class="img-responsive img-thumbnail" alt="" />
+                                </a>
+                            </div>
+
+                        }
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>*@

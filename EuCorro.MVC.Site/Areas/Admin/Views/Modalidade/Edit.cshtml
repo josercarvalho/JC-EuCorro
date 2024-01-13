@@ -1,0 +1,59 @@
+﻿@model EuCorro.Domain.Models.Modalidade
+
+@{
+    ViewBag.Title = "Modalidade";
+    ViewBag.SubTitle = "Editar Modalidade";
+
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Cadastro/Modalidade/menu")
+}
+
+<section class="body-content">
+    @using (Html.BeginForm("Edit", "Modalidade", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewBag.SubTitle</h3>
+            </div>
+            <div class="box-body">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.ModalidadeId)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Distancia, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.Distancia, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Distancia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="panel-footer form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-primary">Salvar Registros</button>
+                        <a class="btn btn-danger" href="@Url.Action("Index")">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+    @*@Scripts.Render("~/jqueryval/js")*@
+}

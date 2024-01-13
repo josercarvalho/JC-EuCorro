@@ -1,0 +1,162 @@
+﻿@model EuCorro.Domain.Models.ModalidadeEvento
+<!-- Modal -->
+<div class="modal fade bs-modal-lg" id="modalidadeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modalidadeModalLabel">Modalidade</h4>
+            </div>
+
+            <div class="modal-body">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="form-inline" id="form-modalidade">
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EventoId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.EventoId, new { htmlAttributes = new { @class = "form-control", @data_bind="" } })
+                                @Html.ValidationMessageFor(model => model.EventoId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ModalidadeEventoId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ModalidadeEventoId, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.ModalidadeEventoId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Reverzamento, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Reverzamento, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                    @Html.ValidationMessageFor(model => model.Reverzamento, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group equipe">
+                            @Html.LabelFor(model => model.AtletasPorEquipe, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.AtletasPorEquipe, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.AtletasPorEquipe, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Vagas, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Vagas, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.Vagas, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NumeroInicial, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NumeroInicial, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.NumeroInicial, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NumeroFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NumeroFinal, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.NumeroFinal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IdadeMin, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.IdadeMin, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.IdadeMin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IdadeMax, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.IdadeMax, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.IdadeMax, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Percurso, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Percurso, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.Percurso, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PercursoImg, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PercursoImg, new { htmlAttributes = new { @class = "form-control", @data_bind = "" } })
+                                @Html.ValidationMessageFor(model => model.PercursoImg, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    </div>
+
+                    <div id="foreach-binding" class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="bg-light-blue-gradient">
+                                <tr>
+                                    <th colspan="6"><span>PREÇOS</span></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: precos">
+                                <tr>
+                                    <td>
+                                        @Html.TextBox("DataIni", null, new { @class = "form-control date", @data_binde = "DataIni", @nome = "DataIni", @placeholder = "Aparti do dia" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("HoraIni", null, new { @class = "form-control timepicker", @name = "HoraIni", @data_bind = "value: HoraIni", @placeholder = "Hora Início" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("DataFim", null, new { @class = "form-control date", @data_binde = "DataFim", @nome = "DataFim", @placeholder = "Data Final" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("HoraFim", null, new { @class = "form-control timepicker", @name = "HoraFim", @data_bind = "value: HoraFim", @placeholder = "Encerramento" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("Valor", null, new { @class = "form-control dinheiro", @name = "Valor", @data_bind = "value: Valor", @placeholder = "Valor" })
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger" data-bind="click: excluiPreco">EXCLUIR</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <button class="btn btn-default" data-bind='click: addModalidadePreco' title="Adicionar Preço"><i class="fa fa-plus"></i> Preço</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div id="msgErroModalidade" class="alert alert-danger hide text-center"><small><span></span></small></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="salvarModalidade" class="btn btn-primary salvarModalidade">Salvar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

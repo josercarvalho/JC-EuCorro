@@ -1,0 +1,38 @@
+﻿<div id="nav" class="navbar navbar-default">
+    <div class="container">
+        <span class="pull-left">
+            <a href="@Url.Action("Index", "Home")"><span><img class="profile-img" src="~/img/Eu-Corro-Logo.png" width="140" alt="" /></span></a>
+        </span>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @*<a class="navbar-brand our_logo" href="#"><img src="~/img/Eu-Corro-Logo.png" width="150" alt="EUCORRO" /></a>*@
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        @*<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="li-mnu-Home">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "active" })</li>
+                <li id="li-mnu-Empresa">@Html.ActionLink("Meus Dados", "Edit", "Usuario")</li>
+                <li id="li-mnu-Eventos">@Html.ActionLink("Meus Eventos", "Eventos", "Eventos")</li>
+                <li id="li-mnu-Portifolio">@Html.ActionLink("Inscriçoes", "index", "Inscricao")</li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Portifólio <b class="caret"></b> </a>
+                    <ul class="dropdown-menu" aria-labelledby="themes">
+                        <li role="menuitem">@Html.ActionLink("Aluguéis", "Alugueis", "Home")</li>
+                        <li role="menuitem">@Html.ActionLink("Serviços", "Servicos", "Home")</li>
+                    </ul>
+                </li>
+                <li id="li-mnu-Galeria">@Html.ActionLink("Galeria", "Galeria", "Home")</li>
+                <li id="li-mnu-Contato">@Html.ActionLink("Contato", "Contact", "Home")</li>
+                <li><a href="#" class="booking">ÁREA DO CLIENTE</a></li>
+            </ul>
+        </div>*@
+        @Html.Partial("_LoginPartial")
+    </div>
+</div>

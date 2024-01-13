@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Vendas/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-2 col-xs-4 well">
+        @using (Html.BeginForm("LogOff", "Account", new { area = "Vendas" }, FormMethod.Post, new { @id = "indexForm" }))
+        {
+            <ul class="nav nav-pills nav-stacked mnu-lateral">
+                <li class="nav-header disabled"><a><em>Cadastro</em></a></li>
+                <li><a href="#">Inscrição</a></li>
+                <li><a href="@Url.Action("Edit","Atleta")">Meus Dados</a></li>
+                <li><a href="@Url.Action("ForgotPassword","Account")">Alterar Senha</a></li>
+                <li class="nav-header disabled"><a><em>Eventos</em></a></li>
+                <li><a href="#">Entrega de Kits</a></li>
+                <li><a href="#">Inscrições</a></li>
+                <li class="divider"></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()" title="Fazer Log Off"> Sair</a></li>
+                @*<li><a href="@Url.Action("LogOff","Account", new { @area = "Vendas" })">Sair</a></li>*@
+            </ul>
+        }
+    </div>
+    <div class="col-md-10 col-xs-12" id="conteudo">
+        <div id="cabecalho-dados">
+            <hgroup class="title text-center">
+                <h2>EUCORRO Assessoria de Eventos Esportivos</h2>
+            </hgroup>
+            <br />
+            <div class="col-md-6 col-xs-12">
+                <div class="ImagePreviewBox text-right">
+                    <span>
+                        <img src="~/img/Logo-perfil-EuCorro.jpg" class="img-thumbnail img-responsive" height="170" width="200" />
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="ImagePreviewBox">
+                    <span>
+                        <img src="~/img/Logo-topo.jpg" class="img-thumbnail img-responsive" height="170" width="270" />
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div id="partial"></div>
+    </div>
+</div>

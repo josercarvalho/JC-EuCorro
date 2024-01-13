@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@using EuCorro.MVC.Site.Aolication.Services
+
+@{
+    var usuario = new AutenticacaoCliente().ObterAutenticado();
+}
+
+@*<div class="well">*@  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="heading">
+                    @*<ul class="breadcrumb">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@ViewBag.Tela</li>
+                    </ul>*@
+                    @*<h2>@ViewBag.Area</h2>*@
+                </div>
+            </div>
+            <div class="col-md-6">
+                @if (@usuario != null)
+                {
+                    using (Html.BeginForm("LogOff", "Account", new { area = "Clientes" }, FormMethod.Post, new { @id = "logoutForm", @class = "nav navbar-nav navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="pull-right form-control">
+                            Bem Vindo, @Html.ActionLink(" " + User.Identity.GetUserName() + " | ", "Edit", "Atleta", routeValues: null, htmlAttributes: new { title = "Meus Dados" })
+                            <a href="javascript:document.getElementById('logoutForm').submit()" title="Fazer Log Off"> Sair</a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+@*</div>*@
+

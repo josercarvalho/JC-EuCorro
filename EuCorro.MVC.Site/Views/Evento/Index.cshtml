@@ -1,0 +1,69 @@
+﻿@model EuCorro.MVC.Site.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Eventos";
+    var imgBanner = Url.Content("~/Uploads/Banners/");
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Evento/menu")
+}
+
+<div class="body-content-sub">
+    <h3 class="subtitle">EVENTOS</h3>
+
+    <div class="caixa-box">
+        <section id="evento-header">
+            <div class="row">
+                <div class="text-center">
+                    <h3><strong><span style="color: #e32e0e;">CONFIRA TODOS OS NOSSOS EVENTOS</span></strong></h3>
+                    <p><strong><span style="color: #e32e0e;">CLIQUE NO EVENTO QUE DESEJA PARTICIPAR E FAÇA SUA INSCRIÇÃO</span></strong></p>
+                </div>
+            </div>
+        </section>
+        <hr />
+        <section id="evento-body">
+            <div class="content-wrapper">
+                <div class="row">
+                    @foreach (var item in Model.ListaBanner)
+                    {
+                        if (@item.URL == null)
+                        {
+                            <div class="frontart col-sm-3">
+                                <div class="fblock">
+                                    <a href="#">
+                                        <div class="blogheader">
+                                            <img class="img-responsive" src="@imgBanner@item.Banner" alt="@item.Nome">
+                                        </div>
+                                        <div class="blogtitle">
+                                            <h2 class="text-head-limit ellipsis" title="@item.Nome">
+                                                @item.Nome
+                                            </h2>
+                                        </div>
+                                    </a>
+                                    <div class="blogfooter">
+                                        <p class="entry-meta">
+                                            <ul class="app-event-preview-infos">
+                                                <li><i class="fa fa-calendar fa-fw"></i> @item.DataEvento.ToShortDateString()</li>
+                                                <li><i class="fa fa-map-o fa-fw"></i> @item.Cidade - @item.Estado</li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                    <div class="readmore">
+                                        <a href="@Url.Action("Details", "Evento", new { @id = item.EventoId })">Saiba mais aqui</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<section id="sobre">
+    @Html.Partial("_SobreBotton")
+</section>

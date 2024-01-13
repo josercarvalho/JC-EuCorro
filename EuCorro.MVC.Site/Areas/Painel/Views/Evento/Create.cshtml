@@ -1,0 +1,276 @@
+﻿@model EuCorro.Domain.Models.Evento
+
+@{
+    ViewBag.Title = "Cadastro de Evento";
+    ViewBag.SubTitle = "Cadastrar Novo Evento";
+    var imgBanner = Url.Content("~/Uploads/Banners/bannerEvento.png");
+    var imgKit = Url.Content("~/Uploads/Banners/imagemKit.png");
+    var imgPatrocinador = Url.Content("~/Uploads/Banners/bannetPatrocinador.png");
+    @Styles.Render("~/jasny-bootstrap/css")
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Cadastro/Evento/menu")
+}
+
+@Styles.Render("~/AdminLTE/plugins/datepicker/css")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css")
+
+@using (Html.BeginForm("Create", "Evento", FormMethod.Post, new { enctype = "multipart/form-data", id = "eventoForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="box box-default box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title">Dados do Evento</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="text-center">@TempData["SuccessMessage"]</h4>
+                </div>
+            }
+            <div class="form">
+                @*@Html.HiddenFor(model => model.EventoId, new { @data_bind = "value: eventoId" })
+                    @Html.HiddenFor(model => model.PastaFiles, new { @data_bind = "value: pastaFiles" })*@
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.EventoTipoId, "Tipo do Evento", htmlAttributes: new { @class = "control-label " })
+                        @Html.DropDownListFor(model => model.EventoTipoId, new SelectList(ViewBag.TipoEvento, "EventoTipoId", "Nome"), "Selecione o Tipo...", new { @id = "ddlTipoEvento", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EventoTipoId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.Nome, "Nome do Evento", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", style = "max-width: 100%;" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.TituloEvento, "Titulo do Evento", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.TituloEvento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TituloEvento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        @Html.LabelFor(model => model.DescricaoEvento, "Descrição do Evento", htmlAttributes: new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.DescricaoEvento, new { @class = "form-control", @rows = "3", @placeholder = "Entre com a descrição do Evento aqui...", @style = "width: 95%; height: 200px" })
+                        @Html.ValidationMessageFor(model => model.DescricaoEvento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.DataEvento, "Data do Evento", htmlAttributes: new { @class = "control-label " })
+                        <div class="input-append input-group date">
+                            <span class="input-group-addon add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                            @Html.EditorFor(model => model.DataEvento, new { htmlAttributes = new { @class = "form-control DataEvento" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DataEvento, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.HoraEvento, "Hora do Evento", htmlAttributes: new { @class = "control-label" })
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    @Html.EditorFor(model => model.HoraEvento, new { htmlAttributes = new { @class = "form-control timepicker" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.HoraEvento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3" title="Data do início das inscrições">
+                        @Html.LabelFor(model => model.DataEncerramento, "Inicio da Inscriçao", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-append input-group date">
+                            <span class="input-group-addon add-on"><i class="glyphicon glyphicon-calendar"></i></span>
+                            @Html.EditorFor(model => model.DataEncerramento, new { htmlAttributes = new { @class = "form-control DataEvento" } })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DataEncerramento, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group" title="Hora término das inscrições">
+                                @Html.LabelFor(model => model.HoraEncerramento, "Hora Encerramento Inscrição", htmlAttributes: new { @class = "control-label" })
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                    @Html.EditorFor(model => model.HoraEncerramento, new { htmlAttributes = new { @class = "form-control timepicker" } })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.HoraEncerramento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.URL, "URL do Resultado", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control", @data_bind = "value: uRL" } })
+                        @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-8">
+                        @Html.LabelFor(model => model.Endereco, "Endereço do Evento", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control", style = "max-width: 100%;" } })
+                        @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.EstadoId, "Estado", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.EstadoId, new SelectList(ViewBag.Estado, "EstadoId", "Nome"), "Selecione o Estado...", new { @id = "ddlEstados", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.CidadeId, "Cidade", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.CidadeId, Enumerable.Empty<SelectListItem>(), "Selecione a Cidade...", new { @id = "ddlCidades", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CidadeId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.Regulamento, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Regulamento, new { @type = "file", @class = "form-control", @accept = "document/pdf", @maxlength = "2000"})
+                        @Html.ValidationMessageFor(model => model.Regulamento, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group text-center">
+                        @Html.LabelFor(model => model.Ativo, "Inscrições Abertas", htmlAttributes: new { @class = "control-label" })
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.Ativo, new { htmlAttributes = new { @class = "form-control checkbox" } })
+                            @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger Ativo" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            @*<div class="form-group">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-lg btn-success saveEvento">Salvar Registros</button>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+
+    <div class="box box-default box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title">Imagens do Evento</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="form">
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        @Html.LabelFor(model => model.BannerEvento, "Banner do Evento", new { @class = "control-label" })
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-preview thumbnail bg-purple-gradient" data-trigger="fileinput" style="width: 100%; max-height: 330px; line-height: 300px">
+                                <img src="@imgBanner" alt="...">
+                            </div>
+                            <span class="help-block">Tamanho da imagem: 792x330</span>
+                            <div>
+                                <span class="btn btn-primary btn-file">
+                                    <span class="fileinput-new">Procurar Banner</span>
+                                    <span class="fileinput-exists">Alterar Banner</span>
+                                    @Html.TextBoxFor(model => model.BannerEvento, new { @type = "file", @class = "form-control", @accept = "image/x-png, image/gif, image/jpeg, image/jpg", @maxlength = "2000" })
+                                    @Html.ValidationMessageFor(model => model.BannerEvento)
+                                </span>
+                                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remover Banner</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.BannerPatrocinio, "Banner Partocinador", new { @class = "control-label" }) <br />
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-preview thumbnail bg-purple-gradient" data-trigger="fileinput" style="width: 280px; height: 100%;">
+                                <img src="@imgPatrocinador" alt="...">
+                            </div>
+                            <span class="help-block">Tamanho da imagem: 330x300</span>
+                            <div>
+                                <span class="btn btn-primary btn-file">
+                                    <span class="fileinput-new">Procurar Imagem</span>
+                                    <span class="fileinput-exists">Alterar Imagem</span>
+                                    @Html.TextBoxFor(model => model.BannerPatrocinio, new { @type = "file", @class = "form-control", @accept = "image/x-png, image/gif, image/jpeg, image/jpg", @maxlength = "2000" })
+                                    @Html.ValidationMessageFor(model => model.BannerPatrocinio)
+                                </span>
+                                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remover Imagem</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.ImagemKit, "Imagem do Kit", new { @class = "control-label" }) <br />
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-preview thumbnail bg-purple-gradient" data-trigger="fileinput" style="width: 95%; height: 95%;">
+                                <img src="@imgKit" alt="...">
+                            </div>
+                            <span class="help-block">Tamanho da imagem: 600x400</span>
+                            <div>
+                                <span class="btn btn-primary btn-file">
+                                    <span class="fileinput-new">Procurar Imagem</span>
+                                    <span class="fileinput-exists">Alterar Imagem</span>
+                                    @Html.TextBoxFor(model => model.ImagemKit, new { @type = "file", @class = "form-control", @accept = "image/x-png, image/gif, image/jpeg, image/jpg", @maxlength = "2000" })
+                                    @Html.ValidationMessageFor(model => model.ImagemKit)
+                                </span>
+                                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remover Imagem</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-9">
+                        @Html.LabelFor(model => model.InformacaoKit, "Informações do Kit", htmlAttributes: new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.InformacaoKit, new { @class = "form-control", @rows = "3", @placeholder = "Entre com as Informações do Kit aqui...", @style = "width: 95%; height: 200px" })
+                        @Html.ValidationMessageFor(model => model.InformacaoKit, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer well">
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-success">Salvar Registros</button>
+                    <a class="btn btn-warning" href="@Url.Action("Index")">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+    @Scripts.Render("~/jasny-bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
+    @Scripts.Render("~/AdminLTE/plugins/timepicker/js")
+    @Scripts.Render("~/bundles/knockout/js")
+    @Scripts.Render("~/bootstrap-wizard/js")
+    <script src="~/Scripts/bootstrap-checkbox.js"></script>
+    <script src="~/Scripts/jquery.maskMoney.js"></script>
+    <script src="~/Scripts/Evento/evento.js"></script>
+}

@@ -1,0 +1,118 @@
+﻿@model EuCorro.MVC.Site.ViewModels.EventoViewModel
+
+@{
+    ViewBag.Title = "Novo Evento";
+    ViewBag.SubTitle = "Cadastrar Novo Evento";
+    @Styles.Render("~/jasny-bootstrap/css")
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Cadastro/Evento/menu")
+}
+
+<style>
+    .validationMessage {
+        color: red;
+        font-size: 0.8em;
+    }
+</style>
+
+@Styles.Render("~/AdminLTE/plugins/datepicker/css")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css")
+@*@Styles.Render("~/bootstrap-switch/css")*@
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">@ViewBag.SubTitle</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+            @*<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>*@
+        </div>
+    </div>
+    <div class="box-body">
+        <div id="rootwizard">
+            <nav class="navbar">
+                <div class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <ul id="myTabs" class="nav nav-pills" role="tablist">
+                            <li><a href="#tab1" role="tab" data-toggle="tab">Informações Gerais</a></li>
+                            <li><a href="#tab2" role="tab" data-toggle="tab">Modalidade</a></li>
+                            <li><a href="#tab3" role="tab" data-toggle="tab">Kits e Camisetas</a></li>
+                            @*<li id="myTab1" class="active"><a href="#tab1" role="tab" data-toggle="tab">Informações Gerais</a></li>
+                                <li id="myTab2"><a href="#tab2" role="tab" data-toggle="tab">Modalidade</a></li>
+                                <li id="myTab3"><a href="#tab3" role="tab" data-toggle="tab">Kits e Camisetas</a></li>*@
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="tab1">
+                    <section id="Evento">
+                        @Html.Partial("_Evento", (Object)Model)
+                    </section>
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="tab2">
+                    <section id="Modalidades">
+                        <div id="divModalidade" style="display:none">
+                            @Html.Partial("_Modalidade", (Object)Model)
+                        </div>
+
+                        <div id="divItensModalidade">
+                            @Html.Partial("_indexModalidade", (Object)Model)
+                        </div>
+                    </section>
+                </div>
+                <div role="tabpanel" class="tab-pane fade in" id="tab3">
+                    <section id="Camisetas">
+                        <div id="divCamiseta" style="display:none">
+                            @Html.Partial("_Camiseta", (Object)Model)
+                        </div>
+                        @*<div id="divItensCamisetas">
+                                @Html.Partial("_Camiseta", (Object)Model);
+                            </div>*@
+                    </section>
+                </div>
+                <hr />
+                <div>
+                    <ul class="pager wizard">
+                        <li class="previous first" style="display:none;"><a href="#">Primeiro</a></li>
+                        <li class="previous"><a href="#"> << Anterior</a></li>
+                        <li class="next last" style="display:none;"><a href="#">Último</a></li>
+                        <li class="next"><a href="#">Próximo >></a></li>
+                        <li class="next finish" style="display:none;"><a href="#"><< Finalizar >></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <div class="form-group">
+            <div>
+                @*<button type="button" class="btn btn-lg btn-primary"  data-bind="click:saveEvento" >Salvar Registros</button>*@
+                <a class="btn btn-lg btn-warning" href="@Url.Action("Index")">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+    @Scripts.Render("~/jasny-bootstrap/js")
+    @*@Scripts.Render("~/bootstrap-switch/js")*@
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
+    @Scripts.Render("~/AdminLTE/plugins/timepicker/js")
+    @Scripts.Render("~/bundles/knockout/js")
+    @Scripts.Render("~/bootstrap-wizard/js")
+    <script src="~/Scripts/bootstrap-checkbox.js"></script>
+    <script src="~/Scripts/jquery.maskMoney.js"></script>
+    <script src="~/Scripts/Evento/evento.js"></script>
+    <script src="~/Scripts/Evento/modalidadeVM.js"></script>
+}

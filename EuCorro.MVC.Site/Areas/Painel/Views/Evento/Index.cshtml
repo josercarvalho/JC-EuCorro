@@ -1,0 +1,238 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<EuCorro.Domain.Models.Evento>
+
+@{
+    ViewBag.Title = "Eventos";
+    ViewBag.SubTitle = "Cadastro de Eventos";
+    var imgBanner = Url.Content("~/Uploads/Banners/");
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Cadastro/Evento/menu")
+}
+
+@Styles.Render("~/AdminLTE/plugins/datepicker/css")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css")
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="text-center">@TempData["SuccessMessage"]</h4>
+    </div>
+}
+
+<div class="bb-alert alert alert-info" style="display:none;">
+    <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+</div>
+
+<section class="body-content">
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ViewBag.SubTitle</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Dimensionar">
+                    <i class="fa fa-minus"></i>
+                </button>
+                @*<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i>
+                    </button>*@
+            </div>
+        </div>
+        <div class="box-body">
+
+            @using (Html.BeginForm("Index", "Evento", FormMethod.Get, new { @class = "row" }))
+            {
+                <div class="col-md-7 col-xs-8">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Procura por Nome" })
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit" title="Procurar">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-sm-3 text-right">
+                    @Html.ActionLink(" ", "Create", null, new { @class = "btn btn-success fa fa-plus", @Title = "Cadastrar" })
+                    @Html.ActionLink(" ", "Index", "Home", null, new { @class = "btn btn-success fa fa-reply", @title = "Voltar a Tela Inicial" })
+                </div>
+            }
+            <hr />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome do Evento</th>
+                        <th>Data Evento</th>
+                        <th>Encerra Inscrições</th>
+                        <th>Status</th>
+                        <th>Banner do Evento</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataEvento)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataEncerramento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ativo)
+                            </td>
+                            <td>
+                                <img src="@imgBanner@item.BannerEvento" class="img-thumbnail" data-src="holder.js/150x150/auto" alt="Banner Evento" width="150" height="150" />
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-table">
+                                    <a href="@Url.Action("Edit", "Evento", new { id = item.EventoId })" class="btn btn-app"><i class="fa fa-edit" title="Editar dados do Evento"></i>Editar</a>
+                                    <a href="@Url.Action("Modalidades", "Evento", new { id = item.EventoId })" class="btn btn-app" title="Modalidades do Evento"><i class="fa fa-list"></i>Modalidades</a>
+                                    @*<a href="@Url.Action("Modalidades", "Evento", new { id = item.EventoId })" class="modal-link btn btn-app" title="Modalidades do Evento"><i class="fa fa-list"></i>Modalidades</a>*@
+                                    <a href="#" class="btn btn-app btn-delete" data-nome="@item.Nome" data-id="@item.EventoId" title="Excluir @item.Nome"><i class="fa fa-trash"></i>Exluir</a>
+                                    @*@Html.ActionLink(" Editar", "Edit", new { id = item.EventoId }, new { @class = "btn btn-app fa fa-folder-open-o", @Title = "Editar" })
+                                        @Html.ActionLink(" Modalidades", "Modalidade", new { id = item.EventoId }, new { @class = "btn btn-app fa fa-list", @Title = "Modalidades" })
+                                        <button id="btn-delete" class="btn btn-app btn-delete fa fa-trash-o" data-nome="@item.Nome" data-id="@item.EventoId" title="Excluir @item.Nome"> Excluir</button>*@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div class="box-footer">
+            <div class="row col-md-12 text-center">
+                Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="modal-container" class="modal fade in" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+    @Scripts.Render("~/jasny-bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
+    @Scripts.Render("~/AdminLTE/plugins/timepicker/js")
+    @Scripts.Render("~/bundles/knockout/js")
+    <script src="~/Scripts/bootstrap-checkbox.js"></script>
+    <script src="~/Scripts/jquery.maskMoney.js"></script>
+    <script src="~/Scripts/Evento/evento.js"></script>
+    @*<script src="~/Scripts/Evento/EventoAddEdit.js"></script>*@
+
+    @*<script type="text/javascript">
+        $(function () {
+            $('#approve-btn').click(function () {
+                $('#modal-container').modal('hide');
+            });
+
+            $("#btn-add-modalidade").on("click", function (e) {
+                e.preventDefault();
+                adicionaModalidade();
+            });
+
+            $('#btn-cancel-modalidade').on('click', function (e) {
+                e.preventDefault();
+                adicionaModalidade();
+            });
+
+            function adicionaModalidade() {
+                $("#divModalidade").slideToggle("slow");
+            };
+
+        });
+    </script>*@
+
+    <script>
+        $(function () {
+            Example.init({
+                "selector": ".bb-alert"
+            });
+        });
+
+        function Refresh() {
+            location.reload(true);
+        };
+
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                var nome = $(this).data("nome");
+                bootbox.confirm("Tem certeza que deseja EXCLUIR " + nome + " ?", function (result) {
+                    if (result) {
+                        excluiCategoria(itemId);
+                        setTimeout("Refresh()", 3000);
+                    }
+                });
+            });
+
+            var excluiCategoria = function (id) {
+                var strUrl = "/Evento/DeleteEvento";
+                $.post(strUrl, { id: id }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+
+            // Initalize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
+
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+            });
+
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
+
+        });
+    </script>
+}
+
+

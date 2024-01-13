@@ -1,0 +1,424 @@
+﻿@model EuCorro.MVC.Site.ViewModels.EventoViewModel
+
+@{
+    ViewBag.Title = "Eventos";
+    var imgBanner = Url.Content("~/Uploads/Banners/");
+    var mes = Model.Mes.Substring(0, 3);
+    var dataEvento = DateTime.Now - Model.Evento.DataEvento;
+    var dias = dataEvento.Days > 1 ? dataEvento.Days + " dias" : "1 dia";
+}
+
+@section Menu
+{
+    @Scripts.Render("~/Scripts/Evento/menu")
+}
+
+<link href="~/Content/Evento.css" rel="stylesheet" />
+
+<div class="body-content-sub">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="">
+                        <div class="title_evento">
+                            <time class="data">
+                                <span class="year">@Model.Ano</span>
+                                <span class="day">@Model.Dia</span>
+                                <span class="month">@mes</span>
+                            </time>
+                            <input class="dt_single_evento" value="4273941" type="hidden">
+                            <div class="table-title table_titulo_evento">
+                                <h1 class="calendario_titulo_evento">@Model.Evento.Nome</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img alt="@Model.Evento.Nome" class="img-responsive" src="@imgBanner@Model.Evento.BannerEvento">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="text text-info"><b>Corrida de Rua</b></h4>
+                        @*<div class="clock"></div>
+                            <div class="text-center">*@
+                        <h4 class="text text-info">Faltam <b>@dias</b> para o EVENTO!</h4>
+                        <a class="btn btn-lg btn-block btn-oranger" id="enrollment-button" rel="nofollow" href="#">Inscreva-se já</a>
+                        @*</div>*@
+                    </div>
+                </div>
+                <h3><b>Sobre a prova</b></h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="description">
+                            <div class="board">
+                                <div class="line">
+                                    <div class="icon glyphicon glyphicon-ok" style="font-size: 25px;padding-left: 13px;padding-top: 10px;color:#fff;"></div>
+                                    <div class="title">Distâncias</div>
+                                    <div class="content">
+                                        <p>5k, 10k</p>
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <div class="icon glyphicon glyphicon-ok" style="font-size: 25px;padding-left: 13px;padding-top: 10px;color:#fff;"></div>
+                                    <div class="title">Local</div>
+                                    <div class="content">
+                                        <p>@Model.Evento.Endereco</p>
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <div class="icon glyphicon glyphicon-ok" style="font-size: 25px;padding-left: 13px;padding-top: 10px;color:#fff;"></div>
+                                    <div class="title">Largada</div>
+                                    <div class="content">
+                                        <p>@Model.Evento.HoraEvento</p>
+                                    </div>
+                                </div>
+                                <div class="line botnone">
+                                    <div class="icon glyphicon glyphicon-ok" style="font-size: 25px;padding-left: 13px;padding-top: 10px;color:#fff;"></div>
+                                    <div class="title">Retirada de kit</div>
+                                    <div class="content">
+                                        <p>@Model.Evento.InformacaoKit</p>
+                                    </div>
+                                </div>
+                                <div class="text-center ">
+                                    <a class="btn btn-small btn-oranger" id="enrollment-button" rel="nofollow" href="#">Inscreva-se</a>
+                                    @*<b><span style="color: #e32e0e;">Inscrições disponíveis até @Model.Evento.DataEncerramento.ToShortDateString() ou até se esgotarem as vagas</span></b>*@
+                                </div>
+                            </div>
+                            <h4>Encerramento das inscrições</h4>
+                            <p>@Model.Evento.DataEncerramento.ToLongDateString() </p>
+
+
+                            <h4>Descrição do evento</h4>
+                            <p></p><p class="text-justify">@Model.Evento.DescricaoEvento</p>
+                            <p></p>
+                            <p>&nbsp;</p>
+                            <p></p>
+                            <div class="infos tres">
+                                <div class="row">
+                                    <div class="col-md-12 col-xs-12 col-sm-12">
+                                        <div class="col-md-4 col-xs-6 col-sm-4">
+                                            <p class="regulamento">
+                                                <a href="#" data-toggle="modal" data-target="#lightbox">
+                                                    <span class="icone_regulamento"></span>
+                                                    <span class="texto_regulamento">
+                                                        Veja o regulamento clique aqui
+                                                    </span>
+                                                </a>
+                                            </p>
+                                        </div>
+
+                                        @*<div class="col-md-4 col-xs-6 col-sm-4">
+                                            <p class="grupo terceiro">
+                                                <a href="https://www.clubeo2.com.br/calendario-grupos/" target="_blank">
+                                                    <span>
+                                                    </span>Inscreva seu grupo clique aqui
+                                                </a>
+                                            </p>
+                                        </div>*@
+                                        <div class="col-md-4 col-xs-4 col-sm-4 hidden-xs">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="lightbox" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <button type="button" class="close hidden">×</button>
+                                        <div class="modal-content">
+                                            <div class="modal-body regulamento_txt">
+                                                Regulamento de CORRIDA DE RUA Nº 022017
+
+                                                CAPÍTULO I.  O EVENTO ESPORTIVO
+                                                Art.1º. O evento esportivo, aqui denominado “Corrida”, será realizado nas categorias individual masculino e individual feminino em data, horário e local divulgado no próprio site oficial da Corrida ou na página do e-commerce www.ativo.com.
+                                                Art.2º. O horário da corrida e a data poderão sofrer alterações por fatores de ordem externa ou por determinação do Poder Público.
+                                                Art.3º. Esta Corrida é organizada pela empresa Tática Marketing Esportivo Eireli, aqui denominada “Organizadora”, com a supervisão técnica da Federação Estadual de Atletismo. Será constituída uma “Comissão Organizadora”, formada pelo Diretor de Prova e colaboradores designados para tal atribuição, que terá competência para resolver qualquer problema ou responder dúvidas durante a Corrida.
+                                                CAPÍTULO II. COMPETIDORES
+                                                Art.4º. Poderá participar da Corrida o(a) competidor(a), aqui denominado(a) “Atleta”, que se inscrever na Corrida, realizar o pagamento do valor correspondente à inscrição no prazo determinado, expressar concordância com as normas deste Regulamento e firmar o Termo de Responsabilidade.
+                                                Art.5º. De acordo com a determinação da Confederação Brasileira de Atletismo (Norma 12, art.1º, §8º), a idade mínima para o(a) Atleta se inscrever e participar de corridas de rua é a seguinte:
+                                                (i) Corridas com percurso até 5km: 14 (catorze) anos;
+                                                (ii) Corridas com percurso menor que 10km: 16 (dezesseis) anos;
+                                                (iii) Corridas com percurso de 10km até 30km: 18 (dezoito) anos;
+                                                (iv) Maratona e acima: 20 (vinte) anos.
+                                                §1º. A idade a ser considerada obrigatoriamente para os efeitos de inscrição e classificação por faixas etárias é a que o Atleta tiver em 31 de dezembro do ano em que for realizada a Corrida.
+                                                §2º. Os Atletas menores de 18 anos só poderão participar de Corridas com percursos de até 05Km e com prévia autorização, por escrito e com firma reconhecida, dos pais ou do responsável legal. A autorização deverá estar acompanhada de cópia de um documento de identidade do menor de 18 anos de idade, documentos que serão retidos pela Organizadora, no ato de entrega dos kits. A entrega da autorização é requisito para validação da inscrição.
+                                                CAPÍTULO III. INSCRIÇÃO, VALORES E KIT PARTICIPAÇÃO
+                                                Art.6º. As inscrições na Corrida poderão ser realizadas pela Internet no site www.ativo.com.
+                                                Art.7º. O preço da inscrição na Corrida será aquele descrito em tempo real na página oficial da Corrida no e-commerce www.ativo.com/, sendo este definido segundo critério de disponibilidade do número de inscrição por lote, combinando com eventual concessão de descontos para os Atletas associados do Clube O2 e promoção vigente.
+                                                Art.8º. Após a&nbsp;solicitação de inscrição na corrida, o Atleta receberá um e-mail com a confirmação desta solicitação, sendo que a inscrição só será efetivada após o devido pagamento.
+                                                Art.9º. Na hipótese de não efetivação da inscrição, seja pela falta de pagamento do boleto bancário, seja pela não autorização da compra pela operadora do cartão de cartão, o Atleta deverá realizar novo procedimento de inscrição, ocasião em que poderá ocorrer variação no preço pela nova inscrição.
+                                                Art.10. A Organizadora disponibilizará kit de participação para qualquer atleta que tiver a inscrição efetivada na corrida.
+                                                Parágrafo único. O kit de participação é formado por itens que integram o serviço de organização da corrida, sendo composto por medalha, chip e número de peito. A retirada destes itens é definida no capítulo V deste Regulamento.
+                                                Art.11. Será cobrado, pela inscrição on line, um valor que garante não só a segurança e conveniência da transação realizada pelo usuário, mas também remunera os serviços das empresas responsáveis pelo: (i) controle de confirmação e autenticação de pagamento on line junto a instituições financeiras; (ii) sistema de segurança da informação, já que são armazenadas informações pessoais e utilizadas informações criptografadas de cartão de crédito dos clientes; (iii) disparo de e-mail de confirmação do pedido de compra da inscrição (antes da confirmação do pagamento); (iv) disparo de e-mail de confirmação da venda (ou reprovação) de inscrição após a confirmação do pagamento; (v) custo de banda de acesso à internet.
+                                                Art.12. Caso o(a) Atleta não queira arcar com o custo do serviço de inscrição on-line ele poderá realizar a inscrição física, comparecendo pessoalmente na Rua Estela Morato, nº 336, São Paulo, de segunda-feira à sexta-feira, no horário das 9h às 17h. Não serão aceitas inscrições físicas por procuração.
+                                                Art.13. No ato da inscrição, ao concordar com o Regulamento assinalando a opção apresentada no sistema on-line, o(a) Atleta aceitará todos os termos do Regulamento e assumirá total responsabilidade por sua participação na Corrida de acordo com o TERMO DE RESPONSABILIDADE, que é parte integrante deste Regulamento.
+                                                Art.14. As inscrições poderão encerrar a qualquer tempo, caso seja atingido o limite técnico definido para a Corrida.
+                                                ART.15. A QUANTIA PAGA PELA INSCRIÇÃO NÃO SERÁ DEVOLVIDA, CASO O(A) ATLETA(A) COMUNIQUE A DESISTÊNCIA DA COMPRA (SERVIÇO) FORA DO PRAZO PREVISTO NO ART. 49 DO CÓDIGO DE DEFESA DO CONSUMIDOR. PARA TODOS OS EFEITOS, A CONTAGEM DO PRAZO DE 07 (SETE) DIAS INICIA-SE DA EFETIVAÇÃO DO PAGAMENTO E NÃO DA DATA DA CORRIDA.
+                                                Art.16. A inscrição na Corrida é pessoal e intransferível, responsabilizando-se o Atleta pela veracidade das informações inseridas, sob as penalidades da Lei.
+                                                §1º. O Atleta que ceder seu número de peito para outra pessoa será responsável por qualquer acidente ou dano que aquela venha a sofrer.
+                                                §2º. Caso haja fraude comprovada na inscrição, os(as) Atletas envolvidos serão desclassificados da Corrida, ficarão impedidos de participar de outras edições de corridas realizadas pela Organizadora, poderão incorrer nas sanções previstas neste Regulamento e responderão por crime de falsidade ideológica e/ou documental perante as autoridades competentes.
+                                                Art.17. NÃO HAVERÁ INSCRIÇÕES GRATUITAS OU CORTESIAS, ressalvadas as hipóteses excepcionais e temporárias de inscrições de grupos via assessoria esportiva.
+                                                CAPÍTULO IV. INSCRIÇÃO DE IDOSOS E OUTROS BENEFICIÁRIOS
+                                                Art.18. O idoso, para fazer jus ao benefício de 50% (cinquenta por cento) de desconto no valor da inscrição, deverá entrar em contato com a Central de Atendimento por e-mail, informar os dados requisitados e enviar os documentos probatórios da condição de idoso para o endereço sac@ativo.com. Em ato contínuo, será enviado um cupom de desconto, pessoal e intransferível, para que o idoso efetive sua inscrição na corrida.
+                                                Art.19. O estudante, para fazer jus ao benefício de 50% (cinquenta) de desconto no valor da inscrição, deverá entrar em contato com a Central de Atendimento por e-mail, informar os dados requisitados e comprovar que está regularmente matriculado nos níveis e modalidades de educação e ensino previstos no Título V, da Lei nº 9.394, de 20 de dezembro de 1996, enviando por e-mail a cópia dos documentos digitalizados para o endereço sac@ativo.com. Em ato contínuo, será enviado um cupom de desconto, pessoal e intransferível, para que o estudante efetive sua inscrição na corrida.
+                                                Art.20. O(a) Atleta cadeirante poderá participar de percursos de até 05 km e este concorrerá em categoria específica, sendo premiado somente o(a) primeiro(a) colocado(a) da modalidade masculina e da feminina. Para fazer jus ao benefício de 50% de desconto é necessário entrar em contato com a Central de Atendimento, informar os dados requisitados e enviar os documentos probatórios da condição de cadeirante para o endereço sac@ativo.com.  Em ato contínuo, será enviado um cupom de desconto, pessoal e intransferível, para que o(a) Atleta efetive sua inscrição na corrida.
+                                                Art.21. O benefício previsto neste Capítulo não será cumulativo com quaisquer outras promoções,  convênios, produtos e, também, não se aplicará ao valor dos serviços ou produtos adicionais eventualmente oferecidos pela Organizadora ou patrocinadores em conformidade com o art.1, § 1º, Lei  nº 12.933, de&nbsp;26 de dezembro de 2013.
+                                                Art.22. Caso os Atletas beneficiários de algum desconto definidos por lei queiram adquirir kit especiais ou produtos deverão pagar pelo(s) produto(s) selecionado(s), de maneira que o desconto incidirá apenas sobre o valor correspondente à inscrição na corrida.
+                                                Art.23 No caso de ser identificada inscrição fraudulenta, com a finalidade de uso por terceiros dos benefícios descritos neste Capítulo, o(a) Atleta ficará impossibilitado de participar em futuras edições de eventos esportivos realizados pela Organizadora, autorizará que seja emitido um boleto bancário referente à diferença dos valores devidos pela inscrição e sujeitar-se-á às responsabilidades penais cabíveis.
+                                                CAPÍTULO V. ENTREGA DE KITS DE PARTICIPAÇÃO
+                                                Art.24. A entrega do kit de participação pela Organizadora acontecerá nos dias que antecedem a Corrida, em local, data e horário a ser informado, exclusivamente, no site oficial da Corrida ou na página do e-commerce www.ativo.com.
+                                                Parágrafo Único: O Kit deverá ser conferido no ato da entrega. Reclamações posteriores não serão levadas em conta.
+                                                Art.25. Para retirar o kit de participação o Atleta deverá apresentar documento de identificação e a respectiva confirmação de inscrição. A retirada de kits por terceiros poderá ser feita mediante apresentação de autorização especifica para este fim e cópia de documento de identificação do inscrito.
+                                                Art.26. O(a) Atleta não poderá alegar impossibilidade de participar da Corrida pela não retirada tempestiva do kit de participação.
+                                                Art.27. O(a) Atleta que não retirar o kit de participação na data e horário estipulado pela organização terá um prazo de  07 (sete) dias para solicitar o envio do kit por meio de e-mail (sac@ativo.com). O kit só será encaminhado pela Organizadora após a comprovação de pagamento dos custos de remessa (envio, embalagem, seguro e outros) pelo(a) Atleta.
+                                                CAPÍTULO VI. CRONOMETRAGEM, CLASSIFICAÇÃO E USO DO CHIP
+                                                Art.28. O sistema de cronometragem a ser utilizado nesta Corrida será o transponder, via uso de chip.
+                                                Art.29. As três primeiras colocações das categorias masculina e feminina serão definidas por ordem de chegada. As demais colocações serão definidas pela apuração do tempo líquido gasto por cada Atleta para completar o percurso, definido e delimitado pelos tapetes de cronometragem.
+                                                Art.30. Os Atletas serão classificados de acordo com o tempo registrado pelo sistema de cronometragem utilizado na Corrida e não serão considerados os tempos individuais registrados pelos próprios Atletas em nenhuma hipótese.
+                                                Art.31. Haverá ponto de controles distintos de medição do tempo dos Atletas, devendo os Atletas ficarem atentos para cruzarem a linha de largada e de chegada (tapetes de cronometragem) dos respectivos percursos escolhidos.
+                                                Art.32. O(a) Atleta deverá conferir,  no site oficial da Corrida ou na página do e-commerce www.ativo.com, a data, horário e local para realizar a retirada do chip de cronometragem. O(a) Atleta que não retirar o chip na data, horário e local estipulado pela Organizadora fica desde já ciente da impossibilidade de ter cronometrado seu tempo.
+                                                Art.33. O CHIP DEVE SER UTILIZADO OBRIGATORIAMENTE NO CADARÇO DO TÊNIS DURANTE TODO O PERCURSO DA CORRIDA E LIVRE DE INTERFERÊNCIA DIRETA DE OUTROS APARELHOS ELETRÔNICOS. A utilização inadequada do chip pelo(a) Atleta acarreta a não marcação do tempo, isentando-se, então, a Organizadora e parceiros da divulgação do tempo e classificação deste Atleta.
+                                                Art.34. O(a) Atleta fica ciente de que é de sua inteira responsabilidade o correto uso do chip, bem como a passagem no tapete de captação de dados instalado na linha de largada e de chegada da corrida. Igualmente, fica o(a) Atleta ciente de que a captura do tempo poderá sofrer algum tipo de interferência ou perda de informações pelo uso conjunto de outro aparelho eletrônico próximo ao chip.
+                                                Art.35. A troca de chips entre Atletas, a qualquer tempo, configura atitude desleal e anticompetitiva, ensejando a automática desclassificação destes Atletas.
+                                                Art.36. Caso o chip utilizado não seja descartável, o(a) Atleta deverá devolve-lo ao final da Corrida, trocando o chip pela medalha de participação. O (a) Atleta que perder ou extraviar o seu chip deverá pagar à Organizadora a quantia de R$ 100,00 (reais) por unidade.
+                                                CAPÍTULO VII. INSTRUÇÕES E REGRAS PARA CORRIDA
+                                                Art.37. Os Atletas deverão dirigir-se ao local de largada com pelo menos meia hora de antecedência, quando serão dadas as instruções finais. O(a) Atleta que iniciar a Corrida após o horário previsto para a largada será desclassificado.
+                                                Art.38. É obrigação dos Atletas ter conhecimento prévio do percurso da Corrida, que será disponibilizado no site oficial da Corrida ou na página do e-commerce www.ativo.com.
+                                                Art.39. A cada Atleta será fornecido um número que deve ser usado visivelmente no peito durante a Corrida, sem rasura ou alterações, sendo desclassificado quem descumprir esta obrigação.
+                                                Art.40. A participação do(a) Atleta na Corrida é estritamente individual sendo proibido o auxílio de terceiros (assessores, personal trainer) ou de ciclista e a utilização de algum recurso tecnológico que importe em vantagem competitiva.
+                                                Art.41. Na hipótese de desclassificação dos Atletas primeiros colocados, serão chamados os classificados com melhor tempo, sucessivamente.
+                                                Art.42. Os Atletas deverão tomar cuidado com eventuais desníveis, obstáculos, aclives ou declives que possam existir no percurso. A Organizadora não se responsabiliza por possíveis defeitos na pista. Por conta disso, os Atletas devererão consultar, no site oficial da Corrida ou na página do e-commerce www.ativo.com, as ruas ou eventuais trechos de areia, declives e aclives que integram o percurso da Corrida.
+                                                Art.43. Os Atletas deverão observar o trajeto balizado para a corrida, não sendo permitido qualquer meio auxiliar para alcançar qualquer tipo de vantagem. Igualmente, não será permitido o acesso às áreas distintas do percurso demarcado, utilizando-se de caminhos sem serem os sinalizados para tal situação, sendo proibido pular as grades ou cavaletes que delimitam estas áreas para entrar na pista em qualquer momento da Corrida. O descumprimento destas regras causará a desclassificação do(a) Atleta.
+                                                Art.44. O(a) Atleta que empurrar o(a) outro(a) Atleta, de modo a impedir sua progressão, será de desclassificado da Corrida.
+                                                Art.45. O(a) Atleta deve retirar-se imediatamente da Corrida se assim for determinado por um membro da equipe médica oficial indicada pela Comissão Organizadora.
+                                                Art.46. A Corrida será realizada segundo as Regras da CBAt, da Federação e as contidas neste Regulamento.
+                                                Art.47. As ruas usadas para a competição estarão fechadas para tráfego motorizado em todas as direções, sendo providenciadas sinalizações e cavaletes para a orientação dos Atletas.
+                                                Art.48. O(a) Atleta desclassificado(a) não terá o seu tempo divulgado no site.
+                                                CAPÍTULO VIII. RESULTADOS OFICIAIS E PREMIAÇÃO
+                                                Art.49. A premiação desta Corrida será assim distribuída:
+                                                (i) Os três primeiros Atletas colocados na categoria masculina na Corrida de todas as distâncias do evento receberão troféu, podendo, eventualmente, receber prêmios.
+                                                (ii) As três primeiras Atletas colocadas na categoria feminina na Corrida de todas as distâncias do evento receberão troféu, podendo, eventualmente, receber prêmios.
+                                                Art.50. Não haverá premiação em dinheiro, nem premiação para categoria por faixa etária.
+                                                Art.51. Os(as) Atletas que fizerem jus à premiação deverão comparecer ao podium, assim que a cerimônia de premiação for iniciada e a categoria dele for chamada. O(a) Atleta que não comparecer ao podium, durante a cerimônia de premiação, perderá o direito o troféu e eventuais prêmios.
+                                                Art.52. Os resultados oficiais dos Atletas serão informados no site www.ativo.com em até 03 (três) dias após a realização da Corrida, desde que estes observem as regras definidas neste Regulamento.
+                                                CAPÍTULO IX. CONDIÇÕES FÍSICAS DOS ATLETAS E SERVIÇOS DE APOIO
+                                                Art.53. Todos(as) os(as) Atletas deverão estar em dia com rigorosa avaliação médica para realização da Corrida, sendo conhecedores de seu estado de saúde e de sua aptidão física para participar da Corrida.  A Organizadora não se responsabilizará pela saúde física dos Atletas.
+                                                Art.54. O(a) Atleta é responsável pela decisão de participar da Corrida, avaliando sua condição física, desempenho e julgando por si só se deve ou não continuar ao longo da competição.
+                                                Art.55. A Comissão Organizadora poderá, seguindo recomendação do médico responsável pela Corrida, sugerir que o(a) Atleta interrompa ou não participe da Corrida.
+                                                Art.56. A Organizadora não tem responsabilidade sobre o atendimento médico dos Atletas, despesas médicas em casos de internação ou lesões geradas pela participação na Corrida. Porém, em cumprimento as normas da CBAt, será disponibilizado um serviço de ambulância UTI para atendimento emergencial dos Atletas e para a remoção destes aos hospitais da rede pública de saúde.
+                                                Art.57. O(a) Atleta ou&nbsp; seu(sua) acompanhante poderá decidir pela remoção ou transferência para hospitais da rede privada de saúde, eximindo-se, então, a Organizadora de qualquer responsabilidade ou reembolso pelas despesas decorrentes deste atendimento&nbsp;médico.
+                                                Art.58. Serão colocados à disposição dos Atletas, banheiros químicos femininos e masculinos.
+                                                Art.59. Serão disponibilizados guarda-volumes para depósito de bens fungíveis e de baixo valores tais como documentos pessoais, chaves, etc., SENDO VEDADO O DEPÓSITO DE BENS INFUNGÍVEIS OU DE ALTO VALOR, TAIS COMO RELÓGIOS, JOIAS, EQUIPAMENTOS ELETRÔNICOS, CELULARES, CHEQUES, CARTÃO DE CRÉDITO.
+                                                Art.60. O guarda volume será desativado em até uma hora após o término da Corrida.
+                                                Art.61. Ao longo do percurso da Corrida haverá postos de hidratação conforme determinado pela CBAt.
+                                                CAPÍTULO X. DIREITOS DE IMAGEM E DIREITOS AUTORAIS
+                                                Art.62. O(a) Atleta ao participar da Corrida estará incondicionalmente aceitando e concordando em ceder  os direitos de utilização de sua imagem e voz para a Organizadora, patrocinadores e os parceiros comerciais, autorizado que sua imagem e voz sejam divulgadas através de fotos, clips, filmes ou vídeos em rádio, jornais, revistas, sites e televisão, ou qualquer outro meio de comunicação, para uso informativo, promocional ou publicitário, sem que tais ações acarretem ônus à Organizadora e aos patrocinadores, renunciando o recebimento de qualquer renda que vier a ser auferida com tais direitos em qualquer tempo.
+                                                CAPÍTULO XI. ALTERAÇÃO DA DATA CORRIDA
+                                                Art.63. Poderá ocorrer alteração da data da Corrida, seja para antecipar ou postergar a data inicialmente informada.
+                                                Art.64. A informação de alteração de data será divulgada no site oficial da Corrida e comunicada aos inscritos por e-mail.
+                                                Art.65. Na hipótese de alteração de data da Corrida, os Atletas terão o prazo de 07 (sete) dias corridos para solicitarem a devolução do valor pago pela inscrição, contados da data do e-mail de divulgação de nova data. A ausência de manifestação do Atleta dentro deste prazo importará em concordância com a nova data.
+                                                CAPÍTULO XII. SUSPENSÃO DA CORRIDA
+                                                Art.66. A Comissão Organizadora, primando pela segurança e incolumidade física dos Atletas, poderá determinar a suspensão da Corrida, iniciada ou em vias de iniciar, por questões de segurança pública, vandalismo e/ou motivos de força maior. No caso de suspensão de Corrida, por quaisquer destes motivos, a Corrida será considerada realizada e não haverá designação de nova data para realização da Corrida suspensa.
+                                                Art.67. Os(as) Atletas ficam cientes que deverão assumir, no ato da inscrição, todos os riscos e danos da eventual suspensão da Corrida (iniciada ou em vias de iniciar) por questões de segurança pública, vandalismo e/ou motivos de força maior, não gerando qualquer responsabilidade para a Organizadora.
+                                                Art.68. Na hipótese de suspensão da Corrida não haverá devolução do valor da inscrição aos Atletas.
+                                                CAPÍTULO XIII. CANCELAMENTO DA CORRIDA
+                                                Art.69. Reserva-se à Organizadora o direito de cancelar a Corrida por seu exclusivo critério ou por determinação do Poder Público. A Corrida declarada cancelada não será realizada em outra data.
+                                                Art.70. A decisão da Organizadora em cancelar a Corrida será divulgada no site oficial da Corrida e comunicada aos inscritos por e-mail.
+                                                Art.71. Na hipótese de cancelamento da Corrida a Organizadora devolverá aos Atletas os valores pagos a título de inscrição.
+                                                Parágrafo único. Os Atletas que realizarem o pagamento da inscrição via cartão de crédito receberão os valores pagos pela inscrição via operação chargeback (cancelamento da venda e estorno do crédito ao titular do cartão do crédito). O Atletas que realizaram o pagamento da inscrição via boleto bancário deverão entrar em contato com Organizadora para indicar os dados bancários para serem creditados os valores devidos pelo cancelamento da corrida.
+                                                CAPÍTULO XIV. DISPOSIÇÕES GERAIS
+                                                Art.72. Os protestos e reclamações relativos ao resultado final da Corrida deverão ser feitos por escrito e no prazo máximo de trinta dias após a divulgação oficial para o endereço de e-mail sac@ativo.com.
+                                                Art.73. Não haverá reembolso, por parte da Organizadora, patrocinadores e parceiros, de nenhum valor correspondente a danos aos equipamentos e/ou acessórios utilizados pelos Atletas na Corrida, independentemente de qual for o motivo, tampouco, por qualquer extravio de materiais ou prejuízo que porventura os Atletas ou terceiros venham a sofrer durante a participação na Corrida.
+                                                Art.74. Os custos de transporte, hospedagem, alimentação, treinamentos, seguros ou quaisquer outras despesas necessárias para a participação do(a) Atleta, antes, durante e depois da corrida serão de responsabilidade exclusiva do(a) Atleta, inclusive nas hipóteses de alteração da data da Corrida,  suspensão ou cancelamento da Corrida.
+                                                Art.75. A Organizadora poderá, a qualquer momento, suspender ou prorrogar prazos ou, ainda, elevar ou limitar o número de inscrições, em função de necessidades, disponibilidade técnica e/ou questões estruturais, sem aviso prévio.
+                                                Art.76. As dúvidas ou solicitações de informações técnicas deverão ser encaminhadas para o endereço de e-mail sac@ativo.com para que sejam registradas e respondidas à contento, ou para o tefelone de acordo com a sua cidade:
+                                                Eventos
+                                                Cidade   	   DDD	      Número
+                                                São Paulo	   11	      3522-7408
+                                                Rio de Janeiro	   21	      3527-0635
+                                                Curitiba	                 41	      4063-9621
+                                                Belo Horizonte     31	      4062-7563
+                                                Porto Alegre	   51	      4063-9112
+                                                Florianópolis	   48 	      4052-9198
+                                                Brasília	                 61	      4063-8812
+                                                Salvador	   71	      4062-8601
+                                                Fortaleza	   85	      4062-9988
+                                                Art.77. Os Atletas são responsáveis pela veracidade das informações fornecidas no sistema on-line ou na ficha de inscrição. Os Atletas concordam que o e-mail será o meio de comunicação utilizado pela Organizadora para repassar informações e atualizações referentes à Corrida.
+                                                Art.78. A Organizadora poderá, a seu critério ou conforme as necessidades da Corrida, alterar ou revogar este Regulamento, total ou parcialmente, informando as mudanças no site oficial da Corrida ou na página do e-commerce www.ativo.com. Este Regulamento está registrado no Cartório do Ofício de Títulos e Documentos da Cidade de São Paulo.
+                                                Art.79. As dúvidas ou omissões deste Regulamento serão dirimidas pela Organizadora e/ou Comissão Organizadora da Corrida de forma soberana.
+                                                ANEXO I. TERMO DE RESPONSABILIDADE
+                                                Eu, "identificado no cadastramento da inscrição", no perfeito uso de minhas faculdades, DECLARO para os devidos fins de direito que:
+                                                1. Estou ciente de que se trata de uma Corrida de rua, cujo percurso é de meu conhecimento.
+                                                2. Estou em plenas condições físicas e psicológicas de participar desta Corrida e estou ciente que não existe nenhuma recomendação médica que me impeça de praticar atividades físicas.
+                                                3. Assumo, por minha livre e espontânea vontade, todos os riscos envolvidos e suas consequências pela participação nesta Corrida (que incluem possibilidade de invalidez e morte), isentando-se, então, a Organizadora, seus colaboradores e patrocinadores DE TODA E QUALQUER RESPONSABILIDADE por quaisquer danos materiais, morais ou físicos, que porventura venha a sofrer, advindos da participação nesta Corrida.
+                                                4. Li, conheço, aceito e me submeto integralmente a todos os termos do Regulamento da Corrida.
+                                                5. Declaro que não portarei, nem utilizarei, no percurso e no entorno, bem como no local de entrega de kits, nenhum material publicitário, promocional ou político, sem a devida autorização por escrito da Organizadora; e, também, de qualquer material ou objeto que ponha em risco a segurança dos participantes.
+                                                6. Estou ciente das penalidades e possível desclassificação que posso sofrer caso descumpra o Regulamento ou cometa falta grave. Excluo meu direito de reclamação sobre tais aspectos da Corrida.
+                                                7. Autorizo o uso de minha imagem, para fins de divulgação da Corrida, por fotos, vídeos e entrevistas em qualquer meio de comunicação, sem geração de ônus para a Organizadora e patrocinadores.
+                                                8. Estou ciente que na hipótese de ALTERAÇÃO DE DATA DA CORRIDA OU SUSPENSÃO da Corrida por questões de segurança pública ou força maior, todos os eventuais custos referentes à locomoção, preparação, estadia, viagens, entre outros gastos despendidos serão suportados única e exclusivamente por mim, isentando a Organizadora e patrocinadores pelo ressarcimento de quaisquer destes custos.
+                                                9. Assumo com todas as despesas de hospedagem, traslados, seguros, assistência médica&nbsp;e quaisquer outras despesas necessárias, ou provenientes da minha participação nesta Corrida; antes, durante ou depois da mesma.
+                                                10. Compreendi e estou de acordo com todos os itens deste TERMO DE RESPONSABILIDADE, isentando quem quer que seja, de toda e qualquer responsabilidade legal de tudo o que vier a ocorrer comigo por consequência da minha participação nesta Corrida.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kit">
+                            <h3>Kits</h3>
+                            <image>
+                                <img class="img-thumbnail" src="@imgBanner@Model.Evento.ImagemKit" alt="Imagem do Kit">
+                            </image>
+                            @*<div id="carousel-kit" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators active">
+
+                                        <li data-target="#carousel-kit" data-slide-to="0" class="active">
+                                            <img src="imj/ds_imagem_kit.png">
+                                        </li>
+                                        <li data-target="#carousel-kit" data-slide-to="1" class="">
+                                            <img src="imj/ds_imagem_kit.png">
+                                        </li>
+                                        <li data-target="#carousel-kit" data-slide-to="2" class="">
+                                            <img src="imj/kits_99577.png">
+                                        </li>
+                                        <li data-target="#carousel-kit" data-slide-to="3" class="">
+                                            <img src="imj/ds_imagem_kit.png">
+                                        </li>
+                                        <li data-target="#carousel-kit" data-slide-to="4" class="">
+                                            <img src="imj/ds_imagem_kit.png">
+                                        </li>
+                                        <li data-target="#carousel-kit" data-slide-to="5" class="">
+                                            <img src="imj/ds_imagem_kit.png">
+                                        </li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <img src="imj/ds_imagem_kit.png" alt="Bota pra Correr" class="img-responsive">
+                                            <div class="container">
+                                                <div class="carousel-caption">
+                                                    <h1>Bota pra Correr</h1>
+                                                    <div class="botaoins">
+                                                        <a class="btn btn-default inscreva" href="https://checkout.ativo.com/evento/34294" role="button">Inscreva-se já!</a>
+                                                    </div>
+                                                </div>
+                                                <p class="pkit">Faça a sua inscrição e a de um amigo e ganhe um boné de embaixador de corrida. *Promoção válida apenas para novos corredores, que ainda não tem CPF cadastrados na base de dados de Corridas O2</p>
+                                            </div>
+                                        </div>
+                                        <div class="item ">
+                                            <img src="https://checkout.akamaized.net/kits/108473/ds_imagem_kit.png" alt="Capitão da Corrida" class="img-responsive">
+                                            <div class="container">
+                                                <div class="carousel-caption">
+                                                    <h1>Capitão da Corrida</h1>
+                                                    <div class="botaoins">
+                                                        <a class="btn btn-default inscreva" href="https://checkout.ativo.com/evento/34294" role="button">Inscreva-se já!</a>
+                                                    </div>
+                                                </div>
+                                                <p class="pkit">Monte sua equipe e seja o Capitão da Corrida! Inscreva-se com mais 4 amigos e ganhe sua inscrição. Será aplicado desconto de 20% em cada uma das 5 inscrições; o valor de desconto somado corresponde ao valor integral de uma inscrição.</p>
+                                            </div>
+                                        </div>
+                                        <div class="item ">
+                                            <img src="https://checkout.akamaized.net/upload/kits/kits_99577.png" alt="Inscrição Participação" class="img-responsive">
+                                            <div class="container">
+                                                <div class="carousel-caption">
+                                                    <h1>Inscrição Participação</h1>
+                                                    <div class="botaoins">
+                                                        <a class="btn btn-default inscreva" href="https://checkout.ativo.com/evento/34294" role="button">Inscreva-se já!</a>
+                                                    </div>
+                                                </div>
+                                                <p class="pkit">*ATENÇÃO: Este kit não contempla camiseta e outros itens do kit. Apenas medalha (pós-evento)</p>
+                                            </div>
+                                        </div>
+                                        <div class="item ">
+                                            <img src="https://checkout.akamaized.net/kits/108467/ds_imagem_kit.png" alt="Kit Estações" class="img-responsive">
+                                            <div class="container">
+                                                <div class="carousel-caption">
+                                                    <h1>Kit Estações</h1>
+                                                    <div class="botaoins">
+                                                        <a class="btn btn-default inscreva" href="https://checkout.ativo.com/evento/34294" role="button">Inscreva-se já!</a>
+                                                    </div>
+                                                </div>
+                                                <p class="pkit">Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento)</p>
+                                            </div>
+                                        </div>
+                                        <div class="item ">
+                                            <img src="https://checkout.akamaized.net/kits/108469/ds_imagem_kit.png" alt="Kit Plus" class="img-responsive">
+                                            <div class="container">
+                                                <div class="carousel-caption">
+                                                    <h1>Kit Plus</h1>
+                                                    <div class="botaoins">
+                                                        <a class="btn btn-default inscreva" href="https://checkout.ativo.com/evento/34294" role="button">Inscreva-se já!</a>
+                                                    </div>
+                                                </div>
+                                                <p class="pkit">Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento) + boné</p>
+                                            </div>
+                                        </div>
+                                        <div class="item ">
+                                            <img src="https://checkout.akamaized.net/kits/108480/ds_imagem_kit.png" alt="Kit Vip" class="img-responsive">
+                                            <div class="container">
+                                                <div class="carousel-caption">
+                                                    <h1>Kit Vip</h1>
+                                                    <div class="botaoins">
+                                                        <a class="btn btn-default inscreva" href="https://checkout.ativo.com/evento/34294" role="button">Inscreva-se já!</a>
+                                                    </div>
+                                                </div>
+                                                <p class="pkit">Camiseta ProRun Seamless Tecnology, sacola de treino, plaquinha colecionável e medalha (pós-evento) + jaqueta</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="left carousel-control" href="#carousel-kit" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                                    <a class="right carousel-control" href="#carousel-kit" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </div>*@
+                        </div>
+                        @*<div class="percurso">
+                                <!-- PERCURSO -->
+                                <div class="row wrap-percurso">
+                                    <div class="col-md-12 col-xs-12 col-sm-12">
+                                        <h3 class="title_box">Percurso</h3>
+                                    </div>
+                                    <div class="col-md-12 col-xs-12 col-sm-12">
+                                        <div role="tabpanel">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="active"><a href="#5k" aria-controls="5k" role="tab" data-toggle="tab">5k</a></li>
+                                                <li role="presentation" class="active"><a href="#10k" aria-controls="10k" role="tab" data-toggle="tab">10k</a></li>
+                                            </ul>
+                                            <!-- Tab panes -->
+                                            <div class="tab-content" style="overflow: hidden;height: auto;min-height: 410px;">
+                                                <div role="tabpanel" class="tab-pane active" id="5k"><iframe src="https://www.google.com/maps/d/embed?mid=1fEI-efmCjcIf07893jXpXbLTdHttufnb" border="0" style="border: none;" width="100%" height="400px"></iframe></div><div role="tabpanel" class="tab-pane active" id="10k"><iframe src="https://www.google.com/maps/d/embed?mid=1CViFDXkjaX3cwaagscezEoMgVYD8dNyl" border="0" style="border: none;" width="100%" height="400px"></iframe></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <nav class="affix-top" data-toggle="affix" data-spy="affix" data-offset-top="50" data-offset-bottom="50">
+                    <blockquote>
+                        <small class="text-justify">
+                            Atletas com mais de 60 anos terão o desconto de 50% calculado ao final do processo de inscrição nas modalidades que possuem o benefício.
+                        </small>
+                        <h4 class="strong">Formas de pagamento</h4>
+                        <ul>
+                            <li>
+                                <h5>Cartão de crédito</h5>
+                                <i class="fa fa-2x fa-credit-card"></i>
+                                <i class="fa fa-2x fa-cc-diners-club"></i>
+                                <i class="fa fa-2x fa-cc-mastercard"></i>
+                                <i class="fa fa-2x fa-cc-visa"></i>
+                                <i class="fa fa-2x fa-cc-paypal"></i>
+                            </li>
+                            <li>
+                                <h5>Boleto - Disponível até <b>@Model.Evento.DataEncerramento.ToShortDateString()</b></h5>
+                                <i class="fa fa-3x fa-barcode"></i>
+                            </li>
+                        </ul>
+                        <div class="text-center ">
+                            <a class="btn btn-lg btn-block btn-oranger" id="enrollment-button" rel="nofollow" href="#">Inscreva-se</a>
+                            <b><span style="color: #e32e0e;">Inscrições disponíveis até @Model.Evento.DataEncerramento.ToShortDateString() ou até se esgotarem as vagas</span></b>
+                        </div>
+                    </blockquote>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

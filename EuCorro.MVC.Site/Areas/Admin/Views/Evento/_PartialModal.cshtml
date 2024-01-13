@@ -1,0 +1,30 @@
+﻿@*@model EuCorro.MVC.Site.ViewModels.EventoViewModel*@
+
+@model IEnumerable<EuCorro.Domain.Models.ModalidadeEvento>
+
+<div class="modal-body">
+    <section id="Modalidades">
+        <div id="divModalidade" style="display:none">
+            @Html.Partial("_Modalidade", (Object)ViewBag.ModalidadeEvento);
+        </div>
+
+        <div id="divItensModalidade">
+            @Html.Partial("_indexModalidade", (Object)ViewBag.Eventos);
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                @*<button type="button" id="approve-btn" class="btn btn-danger">Fechar</button>*@
+            </div>
+        </div>
+    </section>
+</div>
+
+@*<script type="text/javascript">
+    $(function () {
+        $('#approve-btn').click(function () {
+            $('#modal-container').modal('hide');
+        });
+    });
+</script>*@

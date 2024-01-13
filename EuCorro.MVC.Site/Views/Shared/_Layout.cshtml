@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewBag.Title - EUCORRO - Assessoria Esportiva</title>
+
+    <!-- Le styles -->
+    @Styles.Render("~/bootstrap/css")
+    @Styles.Render("~/website/css")
+
+</head>
+<body>
+    <div class='preloader'><div class='loaded'>&nbsp;</div></div>
+
+    <section id="menu">
+        @Html.Partial("_Topo")
+    </section>
+
+    <section id="corpo" @*class="container-fluid body-content"*@>
+        @RenderBody()
+        <a id="back-to-top" class="scrollup" href="#" title="Click para retornar ao topo da página" data-toggle="tooltip"><i class="fa fa-chevron-up back-to-top"></i></a>
+    </section>
+
+    <section id="rodape">
+        @Html.Partial("_Footer")
+    </section>
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("menu", required: false)
+    @Scripts.Render("~/bootstrap/js")
+    @Scripts.Render("~/website/js")
+
+    @*<script src="~/Scripts/twitter-bootstrap-hover-dropdown.js"></script>
+        <script src="~/Scripts/MyJS/MenuFixo.js"></script>
+        <script src="~/Scripts/MyJS/BotaoInicioPagina.js"></script>
+        <script src="~/Scripts/animate.min.js"></script>
+        <script src="~/Scripts/MyJS/wow.min.js"></script>*@
+
+    <script>
+        
+        //Initiat WOW JS
+        new WOW().init();
+
+        // Loading page
+        var loaderPage = function () {
+            $(".preloader").fadeOut("slow");
+        };
+
+        $(function () {
+            loaderPage();
+        });
+
+    </script>
+
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>

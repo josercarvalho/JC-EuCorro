@@ -1,0 +1,51 @@
+﻿@model EuCorro.MVC.Site.ViewModels.EventoViewModel
+
+@{
+    ViewBag.Title = "Inscrições";
+    var imgBanner = Url.Content("~/Uploads/Banners/");
+    var mes = Model.Mes.Substring(0, 3);
+    var dataEvento = DateTime.Now - Model.Evento.DataEvento;
+    var dias = dataEvento.Days > 1 ? dataEvento.Days + " dias" : "1 dia";
+}
+
+<h2>Inscrições</h2>
+
+<div class="body-content-sub">
+    <h3 class="subtitle">INSCRIÇÃO</h3>
+
+    <div class="caixa-box">
+        <section id="evento-header">
+            <section id="inscricao-login">
+                @if (!Request.IsAuthenticated)
+                {                    
+                    <div class="row">
+                        <div class="well">
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                }
+            </section>
+            <div class="row">
+                <div class="">
+                    <div class="title_evento">
+                        <time class="data">
+                            <span class="year">@Model.Ano</span>
+                            <span class="day">@Model.Dia</span>
+                            <span class="month">@mes</span>
+                        </time>
+                        <input class="dt_single_evento" value="4273941" type="hidden">
+                        <div class="table-title table_titulo_evento">
+                            <h1 class="calendario_titulo_evento">@Model.Evento.Nome</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr />
+
+    </div>
+</div>
+
+@section Scripts {
+    @*<link href="~/Content/carrinho.css" rel="stylesheet" />*@
+}

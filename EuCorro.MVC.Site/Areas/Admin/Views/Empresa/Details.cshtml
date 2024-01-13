@@ -1,0 +1,183 @@
+﻿@model EuCorro.Domain.Models.Empresa
+
+@{
+    ViewBag.Title = "Empresa";
+    ViewBag.SubTitle = "Cadastro da Empresa";
+    var imgSrc = "";
+    if (Model == null)
+    {
+        imgSrc = Url.Content("~/Uploads/Atletas/Anonymous.png");
+    }
+    else
+    {
+        imgSrc = Url.Content("~/Uploads/");
+    }
+    var estado = @ViewBag.EstadoEmpresa;
+    var cidade = @ViewBag.CidadeEmpresa;
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Cadastro/Empresa/menu")
+}
+
+<section class="box">
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ViewBag.SubTitle</h3>
+        </div>
+        <div class="box-body">
+            @if (Model == null)
+            {
+                <div class="box-info">
+                    <h1 class="text-bold text-center">Nenhuma empresa cadastrada!</h1>
+                </div>
+                <div class="text-center">
+                    @Html.ActionLink("Cadastrar Nova Empresa", "Create", new { @class = "btn btn-default" })
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Nome)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Nome)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Telefone)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Telefone)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Responsavel)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Responsavel)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Celular)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Celular)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CEP)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CEP)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Pais")
+                            </dt>
+
+                            <dd>
+                                @*@Html.DisplayFor(model => model.PaisId)*@
+                                BRASIL
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Estado")
+                            </dt>
+
+                            <dd>
+                                @ViewBag.EstadoEmpresa
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayName("Cidade")
+                            </dt>
+
+                            <dd>
+                                @ViewBag.CidadeEmpresa
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Bairro)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Bairro)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Logradouro)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Logradouro)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Numero)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Numero)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Complemento)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Complemento)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CNPJ)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CNPJ)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div id="foto-atleta-div" class="col-md-6">
+                        <figure class="text-center">
+                            <img src="@imgSrc@Model.Avatar" height="220" alt="foto @Model.Nome" title="@Model.Nome" />
+                            <figcaption class="text-center">
+                                @if (Model.Avatar != null)
+                                {
+                                    <strong>@Model.Nome</strong>
+                                }
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="box-footer">
+            <div class="panel-footer form-group">
+                @*<div class="text-center">*@
+                @if (Model != null)
+                {
+                    @Html.ActionLink("Editar Dados", "Edit", new { id = Model.EmpresaId }, new { @class = "btn btn-default" })
+                }
+                <a class="btn btn-default" href="@Url.Action("Index","Home")">Cancelar</a>
+                @*</div>*@
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,91 @@
+﻿@model EuCorro.MVC.Site.ViewModels.ContatoViewModel
+
+@{
+    ViewBag.Title = "Contato EUCORRO";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Empresa-theme.css" rel="stylesheet" />
+
+<div class="body-content-sub">
+    <div class="col-md-12">
+        <h3 class="subtitle">Fale com a <em>EUCORRO</em></h3>
+        <p class="titulo">Eventos Esportivos</p>
+    </div>
+    <br />&nbsp;
+
+    <div class="col-md-6 enigma_contact_form_fields">
+        @*<h4 class="subtitle">Entre em contato conosco.</h4>*@
+        <div id="weblizar_form">
+            <form role="form" method="POST" action="/Home/Contact">
+                <div class="enigma_form_group">
+                    <label for="Nome">Nome<small>*</small></label>
+                    <input name="Nome" id="Nome" class="enigma_con_input_control" type="text">
+                    <span id="contact_name_error" style="display:none;color:red;">Informe seu nome</span>
+                </div>
+                <div class="enigma_form_group">
+                    <label for="Email">E-mail<small>*</small></label>
+                    <input id="Email" name="Email" class="enigma_con_input_control" type="email">
+                    <span id="contact_email_error" style="display:none;color:red;">Informe seu e-mail</span>
+                </div>
+
+                <div class="enigma_form_group">
+                    <label for="Mensagem">Mensagem</label>
+                    <textarea class="enigma_con_textarea_control" name="Mensagem" rows="5"></textarea>
+                    <span id="Mensagem" style="display:none;color:red;">Digite uma mensagem</span>
+                </div>
+                @*<button class="enigma_send_button" type="submit" name="query_submit" id="query_submit">Enviar mensagem</button>*@
+                <button class="btn btn-warning btn-lg" type="submit" title="Enviar Mensagem à EUCORRO">Enviar mensagem</button>
+
+            </form>
+        </div>
+        <div id="enquiry_send_massage" style="display:none;">
+            <div class="callout-box callout-box2 clearfix">
+                <div class="callout-content">
+                    <h2>Obrigado por nos procurar. Breve entraremos em contato.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="enquiry_send_massage" style="display:none;">
+        <div class="callout-box callout-box2 clearfix">
+            <div class="callout-content">
+                <h2>Obrigado por nos procurar. Breve entraremos em contato.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 enigma_contact_info">
+        <ul>
+            <li data-original-title="" title="">
+                <i class="fa fa-phone"></i><span class="text">
+                    <span class="desc">Telefone</span>
+                    (98) 98166-0765
+                </span>
+            </li>
+            <li data-original-title="" title="">
+                <i class="fa fa-envelope"></i><span class="text">
+                    <span class="desc">E-mail</span>
+                    contato@eucorromais.com.br
+                </span>
+            </li>
+            <li data-original-title="" title="">
+                <i class="fa fa-clock-o"></i><span class="text">
+                    <span class="desc">Funcionamento</span>
+                    Seg. - Sex. 08.00 - 18.00
+                </span>
+            </li>
+
+            <li data-original-title="" title="">
+                <i class="fa fa-map-marker"></i><span class="text">
+                    <span class="desc">Onde estamos</span>
+                    Rua do Aririzal S/N, Cond Valência 2 Bl 4, Apt 104, Jardim Eudorado, São Luis-MA.
+                </span>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<section id="sobre">
+    @Html.Partial("_SobreBotton")
+</section>

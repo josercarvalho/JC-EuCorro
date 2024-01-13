@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EuCorro.Domain.Models.ModalidadeEvento>
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Modalidades</h3>
+    </div>
+    <div class="box-body">
+        <div class="text-justify">
+            <button class="btn btn-default btn-modalidade"><i class="fa fa-plus"></i> Modalidade</button>
+        </div>
+        <div data-bind="ifnot: ListaModalidade()">
+            <h2 class="text-center"> Ainda não existe Modalidade cadastrada!</h2>
+        </div>
+
+            <table class="table table-hover" id="modalidadeTbl" data-bind="visible: ListaModalidade().length > 0">
+                <thead>
+                    <tr>
+                        <th>Modalidade</th>
+                        <th>Vagas</th>
+                        <th>Inscrição aprtir de</th>
+                        <th>Até o dia</th>
+                        <th>Inscritos</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: ListaModalidade">
+                        <tr>
+                            <td data-bind="text: Nome"></td>
+                            <td data-bind="text: Vagas"></td>
+                            <td data-bind="text: DataIni"></td>
+                            <td data-bind="text: DataFin"></td>
+                            <td data-bind="text: Inscritos"></td>
+
+                            <td>
+                                <div class="btn-group-table">
+                                    <button id="btn-edit" class="btn btn-default btn-edit fa fa-folder-open" data-bind="click: $root.edit"  title="Editar Modalidade"></button>
+                                    <button id="btn-delete" class="btn btn-default btn-delete fa fa-trash" data-bind="click: $root.delete" title="Excluir Modalidade"></button>
+                                </div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+    </div>
+    <div class="box-footer">
+        @*<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>*@
+        @*<button type="submit" id="approve-btn" class="btn btn-danger">Save</button>*@
+    </div>
+</div>

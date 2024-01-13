@@ -1,0 +1,146 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<EuCorro.Domain.Models.Modalidade>
+
+@{
+    ViewBag.Title = "Modalidades";
+    ViewBag.SubTitle = "Listagem das Modalidades";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Cadastro/Modalidade/menu")
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="text-center">@TempData["SuccessMessage"]</h4>
+    </div>
+}
+
+<div class="bb-alert alert alert-info" style="display:none;">
+    <span>Os exemplos preencher esse alerta com conteúdo fictício</span>
+</div>
+
+<section class="body-content">
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ViewBag.SubTitle</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Dimensionar">
+                    <i class="fa fa-minus"></i>
+                </button>
+                @*<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i>
+                    </button>*@
+            </div>
+        </div>
+        <div class="box-body">
+
+            @using (Html.BeginForm("Index", "Modalidade", FormMethod.Get, new { @class = "row" }))
+            {
+                <div class="col-md-7 col-xs-8">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Procura por Nome" })
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" title="Procurar">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-sm-3 text-right">
+                    @Html.ActionLink(" ", "Create", null, new { @class = "btn btn-default fa fa-plus", @Title = "Cadastrar" })
+                    @Html.ActionLink(" ", "Index", "Home", null, new { @class = "btn btn-default fa fa-reply", @title = "Voltar a Tela Inicial" })
+                </div>
+            }
+            <hr />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome da Modalidade </th>
+                        <th>Distância</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ModalidadeId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Distancia)
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-table">
+                                    @Html.ActionLink(" ", "Edit", new { id = item.ModalidadeId }, new { @class = "btn btn-default glyphicon glyphicon-folder-open", @Title = "Editar" })
+                                    <button id="btn-delete" class="btn btn-default btn-delete glyphicon glyphicon-trash" data-nome="@item.Nome" data-id="@item.ModalidadeId" title="Excluir @item.Nome"></button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <div class="col-md-12">
+                Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    @*@Scripts.Render("~/jqueryval/js")*@
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+
+    <script>
+        $(function () {
+            Example.init({
+                "selector": ".bb-alert"
+            });
+        });
+
+        function Refresh() {
+            location.reload(true);
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-delete").click(function (e) {
+                e.preventDefault();
+                var itemId = $(this).data('id');
+                var nome = $(this).data("nome");
+                bootbox.confirm("Tem certeza que deseja EXCLUIR " + nome + " ?", function (result) {
+                    if (result) {
+                        excluiCategoria(itemId);
+                        setTimeout("Refresh()", 3000);
+                    }
+                });
+            });
+
+            var excluiCategoria = function (id) {
+                var strUrl = "/Modalidade/DeleteModalidade";
+                $.post(strUrl, { id: id }, function (data) {
+                    Example.show(data);
+                }, "json");
+            };
+        });
+    </script>
+}
+
+

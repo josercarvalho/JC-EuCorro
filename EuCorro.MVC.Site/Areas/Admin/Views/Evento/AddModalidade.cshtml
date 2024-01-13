@@ -1,0 +1,345 @@
+﻿@model EuCorro.MVC.Site.ViewModels.ModalidadeEventoViewModel
+
+@{
+    ViewBag.Title = Model.NomeEvento;
+    ViewBag.SubTitle = "Modalidades do Evento";
+    var imgPercurso = Url.Content("~/img/Percurso.png");
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Cadastro/Evento/menu")
+}
+
+@Styles.Render("~/AdminLTE/plugins/datepicker/css")
+@Styles.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/css")
+@Styles.Render("~/AdminLTE/plugins/timepicker/css")
+@Styles.Render("~/jasny-bootstrap/css")
+
+<section id="ModalidadesEvento">
+    <span class="help-block">
+            Crie as modalidades que estarão em disputa no seu evento.
+            Estas modalidades podem ser um percurso de 5km, 10km e Meia Maratona.
+            Também pode ser uma modalidade exclusiva para Atletas com Deficiência.
+    </span>
+    <div class="box box-default box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title" data-bind="text: TipoModalidade"></h3>
+        </div>
+        <div class="box-body">
+            <div class="form" data-bind="with modalidade">
+                @if (TempData["SuccessMessage"] != null)
+            {
+                    <div class="alert alert-success alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="text-center">@TempData["SuccessMessage"]</h4>
+                    </div>
+                }
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend>Dados da Modalidade</legend>
+                        <div class="row">
+
+                            @Html.HiddenFor(model => model.ModalidadeEventoId, new { @data_bind = "value: ModalidadeEventoId" })
+                            @Html.HiddenFor( model=>model.Modalidade.EventoId, new { @data_bind = "value: EventoId" })
+                            @*@Html.Hidden("NomeEvento", null, new { @data_bind="value:NomeEvento" })*@
+
+                            <div class="form-group col-md-3">
+                                @Html.Label("Modalidade", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("ModalidadeId", new SelectList(ViewBag.Modalidade, "ModalidadeId", "Nome"), "Selecione o Modalidade...", new { @class = "form-control", @data_bind = "value: ModalidadeId" })
+                                @Html.ValidationMessage("ModalidadeId", "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.Label("Modalidade é revezamento?", htmlAttributes: new { @class = "control-label" })<br />
+                                @Html.CheckBox("Reverzamento", new { @class = "form-control Reverzamento", @data_bind = "value: Reverzamento" })
+                                @Html.ValidationMessage("Reverzamento", "", new { @class = "text-danger" })
+                            </div>
+                            <div id="equipe" class="form-group col-md-3 equipe" style="display: none">
+                                @Html.Label("Quantos atletas por equipe?", htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBox("AtletasPorEquipe", null, new { @class = "form-control", @type = "optional", @data_bind = "value: AtletasPorEquipe" })
+                                @Html.ValidationMessage("AtletasPorEquipe", "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.Label("Número de vagas", htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBox("Vagas", null, new { @class = "form-control", @data_bind = "value: Vagas" })
+                                @Html.ValidationMessage("Vagas", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("Intervalo de numeração para atletas", htmlAttributes: new { @class = "control-label" })
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.TextBox("NumeroInicial", null, new { @class = "form-control", @data_bind = "value: NumeroInicial" })
+                                        @Html.ValidationMessage("NumeroInicial", "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        @Html.TextBox("NumeroFinal", null, new { @class = "form-control", @data_bind = "value: NumeroFinal" })
+                                        @Html.ValidationMessage("NumeroFinal", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.Label("Idade mínima", htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBox("IdadeMin", null, new { @class = "form-control", @data_bind = "value: IdadeMin" })
+                                @Html.ValidationMessage("IdadeMin", "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.Label("Idade máxima", htmlAttributes: new { @class = "control-label" })
+                                @Html.TextBox("IdadeMax", null, new { @class = "form-control", @data_bind = "value: IdadeMax" })
+                                @Html.ValidationMessage("IdadeMax", "", new { @class = "text-danger" })
+                            </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                @Html.Label("Descrição do Percurso", new { @class = "control-label " })
+                                @Html.TextArea("DescricaoPercurso", null, new { @class = "form-control", @rows = "9", @placeholder = "Entre com as Informações do Percurso aqui...", @data_bind = "value: DescricaoPercurso" })
+                            </div>
+                                <div class="form-group col-md-3">
+                                    @Html.Label("Percurso", new { @class = "control-label" })
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-preview thumbnail bg-purple-gradient" data-trigger="fileinput" style="width: 100%; max-height: 330px; line-height: 300px">
+                                            <img src="@imgPercurso" alt="..." eight="150">
+                                        </div>
+                                        <span class="help-block">Tamanho da imagem: 280x190</span>
+                                        <div>
+                                            <span class="btn btn-primary btn-file">
+                                                <span class="fileinput-new">Procurar Imagem</span>
+                                                <span class="fileinput-exists">Alterar Imagem</span>
+                                                @Html.TextBox("Percurso", "", new { @type = "file", @class = "form-control", @data_bind = "value: PercursoImg", @accept = "image/x-png, image/gif, image/jpeg, image/jpg", @maxlength = "2000" })
+                                                @*@Html.TextBoxFor(model => model.Modalidade.PercursoImg, new { @type = "file", @class = "form-control", @accept = "image/x-png, image/gif, image/jpeg, image/jpg", @maxlength = "2000" })*@
+
+
+                                            </span>
+                                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remover Imagem</a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Preço das Inscrições e demais Categorias</legend>
+                        <nav class="navbar">
+                            <div class="navbar navbar-default">
+                                <div class="container-fluid">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#preco" data-toggle="tab"><span class="text-bold"> VALOR DAS INSCRIÇÕES</span></a></li>
+                                        <li><a href="#categoria" data-toggle="tab"><span class="text-bold"> CATEGORIAS DA MODALIDADE</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="categoria">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <legend>Categorias da Modalidade</legend>
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    @Html.Label("Categoria", htmlAttributes: new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextBox("CategoriaDescricao", null, new { @class = "form-control", @data_bind = "value: CategoriaDescricao" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.Label("Desconto", htmlAttributes: new { @class = "control-label col-md-3" })
+                                                    <div class="col-md-9">
+                                                        @Html.TextBox("CategoriaDesconto", null, new { @class = "form-control", @data_bind = "value: CategoriaDesconto" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button type="button" class="btn btn-sm btn-default" data-bind="click: addCategoria">ADICIONAR NA LISTA <i class="fa fa-arrow-right"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-default" data-bind="click: limparCategoria">LIMPAR</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6" style="border-left:solid;">
+                                        <fieldset id="lst-categorias">
+                                            <legend>Lista de Categorias</legend>
+                                            <div class="table-responsive FixedContainer">
+                                                <table id="lstCategorias" class="table table-hover">
+                                                    <thead class="bg-light-blue-gradient">
+                                                        <tr>
+                                                            <th>Categoria</th>
+                                                            <th>Destonto</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody data-bind="foreach: lstCategorias">
+                                                        <tr>
+                                                            <td data-bind="text: CategoriaDescricao"></td>
+                                                            <td data-bind="text: CategoriaDesconto"></td>
+                                                            <td>
+                                                                <div class="btn-group btn-group-table">
+                                                                    <button class="btn btn-default text-center glyphicon glyphicon-trash" title="Remover da Lista" data-bind="click: $root.removeCategoria"> </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade active in" id="preco">
+                                <fieldset id="form-precos">
+                                    <legend>Preços e Descontos da Modalidade</legend>
+                                    <div class="row">
+                                        <div class="form-group col-lg-2">
+                                            @Html.Label("Apartir do dia", new { @class = "control-label " })
+                                            <div class="form-group input-group datetimepicker">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                @Html.TextBox("DtInicial", null, new { @class = "form-control DataEvento", @data_bind = "value: DtInicial" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 bootstrap-timepicker">
+                                            @Html.Label("Hora do Início", new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                @Html.TextBox("HoraIni", null, new { @class = "form-control timepicker", @data_bind = "value: HoraIni" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            @Html.Label("Até o dia", new { @class = "control-label " })
+                                            <div class="form-group input-group datetimepicker">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                @Html.TextBox("DtFinal", null, new { @class = "form-control DataEvento", @data_bind = "value: DtFinal" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2 bootstrap-timepicker">
+                                            @Html.Label("Encerramento", new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                @Html.TextBox("HoraFin", null, new { @class = "form-control timepicker", @data_bind = "value: HoraFin" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-2">
+                                            @Html.Label("Valor da inscrição", new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> R$ </span>
+                                                @Html.TextBox("Valor", null, new { @class = "form-control dinheiro", @data_bind = "value: Valor" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            @Html.Label("Desconto especial?", htmlAttributes: new { @class = "control-label" })<br />
+                                            @Html.CheckBox("DescontoEspecial", new { @class = "form-control DescontoEspecial" })
+                                        </div>
+                                    </div>
+                                    <div class="row desconto" style="display: none">
+                                        <div class="form-group col-md-3">
+                                            @Html.Label("Valor desconto em %", new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> % </span>
+                                                @Html.TextBox("Desconto", null, new { @class = "form-control", @data_bind = "value: Desconto" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.Label("Codigo desconto", new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+                                                @Html.TextBox("CodigoDesconto", null, new { @class = "form-control", @data_bind = "value: CodigoDesconto" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.Label("Válido até", new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                @Html.TextBox("ValidadeDesconto", null, new { @class = "form-control DataEvento", @data_bind = "value: ValidadeDesconto" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.Label("Valor Desconto", new { @class = "control-label" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                                @Html.TextBox("ValorDesconto", null, new { @class = "form-control", @data_bind = "value: ValorDesconto", @disabled = "disabled" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button id="btnAdd" type="button" class="btn btn-sm btn-default" data-bind="click: addPreco">ADICIONAR <i class="fa fa-arrow-downn"></i></button>
+                                        <button id="btnDel" type="button" class="btn btn-sm btn-default" data-bind="click: limparPreco">LIMPAR</button>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Lista de Preços</legend>
+                                    <div class="table-responsive">
+                                        <table id="lstPrecos" class="table table-hover table-condensed">
+                                            <thead class="bg-light-blue-gradient">
+                                                <tr>
+                                                    <th>Data Inicio</th>
+                                                    <th>Hora Inicial</th>
+                                                    <th>Até o dia</th>
+                                                    <th>Encerramento</th>
+                                                    <th>Valor</th>
+                                                    <th>Desc. (%)</th>
+                                                    <th>Vlr. Desc.</th>
+                                                    <th>Cod. Desc.</th>
+                                                    <th>Valid. Desc.</th>
+                                                    <th>&nbsp;</th>
+                                                </tr>
+                                                <tr></tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: lstPrecos">
+                                                <tr>
+                                                    <td data-bind="text: DtInicial"></td>
+                                                    <td data-bind="text: HoraIni"></td>
+                                                    <td data-bind="text: DtFinal"></td>
+                                                    <td data-bind="text: HoraFin"></td>
+                                                    <td data-bind="text: Valor"></td>
+                                                    <td data-bind="text: Desconto"></td>
+                                                    <td data-bind="text: ValorDesconto"></td>
+                                                    <td data-bind="text: CodigoDesconto"></td>
+                                                    <td data-bind="text: ValidadeDesconto"></td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-table">
+                                                            <button class="btn btn-sm btn-default text-center glyphicon glyphicon-trash" title="Remover da Lista" data-bind="click: $root.removePreco"> </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </fieldset>
+                }
+            </div>
+        </div>
+        <div id="msgErroModalidade" class="alert alert-danger hide text-center"><small><span></span></small></div>
+        <div class="box-footer">
+            <div class="form-group panel-footer">
+                <div class="text-center">
+                    <button class="btn btn-success" data-bind='click: SaveModalidade'>Salvar Registros</button>
+                    <a href="@Url.Action("Modalidades", "Evento", new { id = Model.ModalidadeEventoId, nomeEvento = Model.NomeEvento })" class="btn btn-warning" title="Voltar para Eventos">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section Scripts {
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+    @Scripts.Render("~/jasny-bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/momentjs/js")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
+    @Scripts.Render("~/AdminLTE/plugins/bootstrap-wysihtml5/js")
+    @Scripts.Render("~/AdminLTE/plugins/timepicker/js")
+    @Scripts.Render("~/bundles/knockout/js")
+    @Scripts.Render("~/bootstrap-wizard/js")
+    <script src="~/Scripts/bootstrap-checkbox.js"></script>
+    <script src="~/Scripts/jquery.maskMoney.js"></script>
+    <script src="~/Scripts/ViewModel/modalidadeVM.js"></script>
+}

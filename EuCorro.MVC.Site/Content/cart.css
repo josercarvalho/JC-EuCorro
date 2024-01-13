@@ -1,0 +1,202 @@
+﻿/* CART */
+
+#all > aside{
+	float:right;
+	padding-left:15px;
+	width:320px;
+	min-height:100px;
+	background-color:#F2F2F2;
+	zoom:1;
+}
+
+ #all > aside:after {
+	position: absolute;
+	z-index:0;
+	bottom: 0;
+	right:0;
+	top: 0;
+	background: inherit;
+	width: inherit;
+	content: "";
+	padding:inherit;
+} 
+
+#all > aside h1{
+	padding:20px 10px 10px;
+}
+
+#all > aside .shipping-address-reminder{
+	border-top:1px dotted #B4B4B4;
+}
+
+.cart{
+	width:320px;
+	position:relative;
+	z-index:1;
+	padding-bottom:25px;
+	background-color:#F2F2F2;
+}
+.fixedCart #all > aside #cart{
+	position:fixed;
+	top:0;
+}
+.opened-knowMore #all > aside #cart{
+	position:relative !important;
+}
+
+.cart caption{
+	padding:20px 10px 10px;
+	text-align:left;
+}
+.cart table{width:100%;}
+.cart thead th,
+.cart tbody td,
+.cart tfoot td,
+#all > aside .shipping-address-reminder{
+	font-size:12px;
+	color:#858585;
+	font-weight:normal;
+}
+.cart thead th,
+.cart tbody .thead td{
+	padding:3px 10px;
+	text-align:left;
+	background-color:#d9d9d9;
+	color:#6c6c6c;
+}
+.cart thead tr#discountTop{
+	background: url("https://stc.pagseguro.uol.com.br/pagseguro/i/views/ibanking/promocao_cpa/selo-desc.png") no-repeat 10px 10px transparent;
+	border-top: 1px solid #D9D9D9;
+	height: 80px;
+}
+.cart thead tr#discountTop th{
+	background: none;
+	vertical-align: top;
+	position: relative;
+}
+.cart thead tr#discountTop th span{
+	color: #ffffff;
+	font-weight: bold;
+	margin: 22px 25px 0;
+	font-size: 12px;
+	float:left;
+	width: 30px;
+	text-align: center;
+}
+.cart thead tr#discountTop th span small{
+	font-size: 9px;
+}
+.cart thead tr#discountTop th p{
+	font-size: 16px;
+	color:#000000;
+	float: left;
+	font-size: 14px;
+	margin: 25px 0 0 5px;
+}
+.cart thead th+th, .cart tbody .thead td+td{text-align:right;}
+.cart tbody td,
+#all > aside .shipping-address-reminder{
+	padding:10px;
+}
+.cart tfoot td{
+	padding:5px 10px;
+}
+.cart tbody td+td,
+.cart tfoot td+td{
+	vertical-align:bottom;
+	font-size:13px;
+	color:#000;
+	text-align:right;
+	white-space:nowrap;
+}
+.cart tbody td+td strong,
+.cart tfoot td+td strong{
+	font-size:16px;
+	padding-left:5px;
+}
+.cart tr#discountRow td{
+	background-color:#FECC0B;
+	color:#000000;
+	border-top: 3px solid #F2F2F2;
+}
+.cart tbody tr + tr td{
+	border-top:1px dotted #B4B4B4;
+}
+.cart tbody .thead td,
+.cart tbody .preapproval td,
+#amountPerPayment td{
+	border-top:none !important;
+	color:#474747 !important;
+}
+
+#amountPerPayment td+td strong{font-size:15px !important;}
+
+.cart h3{
+	color:#474747;
+	font-weight:normal;
+	font-size:14px;
+	padding:0 0 7px;
+	max-width:180px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.cart tfoot td strong{font-size:18px;}
+.cart tfoot td h3{padding:0;}
+.cart #totalRow td,
+.cart #prePaid td{
+	background-color:#d9d9d9;
+}
+.cart #prePaid td h3,
+.cart #totalRow td h3{
+	color:#6c6c6c;
+	font-weight:bold;
+}
+.cart #balanceRow td,
+.cart #taxRow td,
+.cart #freightRow td{
+	padding:10px;
+	color:#6c6c6c;
+}
+.cart #totalBuyRow td{
+	background-color:#e6e6e6;
+}
+.cart #totalBuyRow td h3{
+	color:#6c6c6c;
+}
+
+.cart tbody .preapproval td dl+dl,
+.cart tbody .preapproval td .details{
+	margin:20px 0 0;
+}
+.cart tbody .preapproval td dt{
+	font-weight:bold;
+	margin:0 0 5px;
+}
+
+.cart .flagCountry{
+	position: relative;
+	color: #999;
+	display: block;
+	padding: 1em;
+	text-align: right;
+	padding-right: 3em;
+}
+	.cart .flagCountry strong {
+		font-size: 12px !important;
+	}
+
+	.cart .flagCountry:before {
+		content: "";
+		position: absolute;
+		right: 0em;
+		top: 11px;
+		display: block;
+		width: 24px;
+		height: 15px;
+		background-image:url(https://stc.pagseguro.uol.com.br/pagseguro/i/checkout-presentation/flag-origin-country.png);
+	}
+
+	.cart .flagCountry.flagCountry-Brazil {
+		background-position: 0 0;
+	}
+/* CART */

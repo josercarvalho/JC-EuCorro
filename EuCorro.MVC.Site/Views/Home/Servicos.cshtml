@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Servicos";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Portifolio/menu")
+}
+
+<div class="body-content-sub">
+    <h3 class="subtitle">SERVIÇOS</h3>
+    <hr />
+    <div class="row">
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <figure class="box">
+                <a data-fancybox="group" data-src="#triathlonID" href="javascript:;">
+                    <div class="zoom">
+                        <img src="~/img/triathlon.png" class="imgBox" />
+                        <div class="zoom-icon"></div>
+                    </div>
+                </a>
+                <h4>Triathlon</h4>
+            </figure>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <figure class="box">
+                <a data-fancybox="group" data-src="#moutainID" href="javascript:;">
+                    <div class="zoom">
+                        <img src="~/img/moutain.png" class="imgBox" />
+                        <div class="zoom-icon"></div>
+                    </div>
+                </a>
+                <h4>Moutain Bike (MTB)</h4>
+            </figure>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <figure class="box">
+                <a data-fancybox="group" data-src="#duathlonID" href="javascript:;">
+                    <div class="zoom">
+                        <img src="~/img/duathlon.png" class="imgBox" />
+                        <div class="zoom-icon"></div>
+                    </div>
+                </a>
+                <h4>Duathlon Terrestre</h4>
+            </figure>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <figure class="box">
+                <a data-fancybox="group" data-src="#corridaID" href="javascript:;">
+                    <div class="zoom">
+                        <img src="~/img/corridaderua.png" class="imgBox" />
+                        <div class="zoom-icon"></div>
+                    </div>
+                </a>
+                <h4>Corrida de Rua</h4>
+            </figure>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <figure class="box">
+                <a data-fancybox="group" data-src="#ciclismoEstradaID" href="javascript:;">
+                    <div class="zoom">
+                        <img src="~/img/ciclismo.png" class="imgBox" />
+                        <div class="zoom-icon"></div>
+                    </div>
+                </a>
+                <h4>Ciclismo de Estrada</h4>
+            </figure>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <figure class="box">
+                <a data-fancybox="group" data-src="#aguathlonID" href="javascript:;">
+                    <div class="zoom">
+                        <img src="~/img/aguathlon.png" class="imgBox" />
+                        <div class="zoom-icon"></div>
+                    </div>
+                </a>
+                <h4>Aquathlon</h4>
+            </figure>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_Servicos")
+
+<section id="sobre">
+    @Html.Partial("_SobreBotton")
+</section>
+
+@section scripts {
+    <link href="~/Content/jquery.fancybox.min.css" rel="stylesheet" />
+    @Scripts.Render("~/fancybox/js")
+
+}

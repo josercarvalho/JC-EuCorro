@@ -1,0 +1,59 @@
+﻿@using EuCorro.MVC.Site.Extensions
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUCORRO Assessoria</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @Styles.Render("~/AdminLTE/plugins/font-awesome/css")
+    @Styles.Render("~/AdminLTE/plugins/ionicons/css")
+    @Styles.Render("~/AdminLTE/bootstrap/css")
+    @Styles.Render("~/AdminLTE/dist/css")
+    @Styles.Render("~/AdminLTE/dist/css/skins")
+    <link href="~/Content/StyleSystem.css" rel="stylesheet" />
+
+</head>
+<body class="hold-transition skin-purple sidebar-mini">
+    <div class="wrapper">
+
+        @Html.Partial("_TopMenu")
+        <!-- Left side column. contains the logo and sidebar -->
+        @Html.Partial("_LeftMenu")
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.TitleSmall</small>
+                </h1>
+                @*@Html.Partial("_AdminLteBreadcrumb")*@
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+        <div class="clearfix"></div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 1.0
+            </div>
+            <strong>&copy; @DateTime.Now.Year - <a href="http://www.facebook.com/JCarvalhoInformatica" target="_blanck" title="JCarvalho TI">JCarvalho TI</a></strong> | Todos os direitos reservados.
+        </footer>
+    </div>
+
+    @Scripts.Render("~/AdminLTE/plugins/jquery/js")
+    @RenderSection("menu", required: false)
+    @Scripts.Render("~/AdminLTE/bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/slimscroll/js")
+    @Scripts.Render("~/AdminLTE/plugins/fastclick/js")
+    @Scripts.Render("~/Scripts/Shared/_Layout")
+    @Scripts.Render("~/AdminLTE/plugins/icheck/js")
+    @Scripts.Render("~/AdminLTE/dist/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

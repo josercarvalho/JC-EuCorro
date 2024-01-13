@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Alugueis";
+}
+
+
+<div class="body-content-sub">
+    <h3 class="subtitle">ALUGUÉIS</h3>
+    <br />
+    <section>
+        <div class="row">
+            <div class="jumbotron" style="height:1250px;">
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/pra3.png" data-toggle="lightbox" data-gallery="multiimages" data-title="Placa de sinalização" class="img-thumbnail">
+                            <img src="~/img/pra3.png" alt="" class="img-responsive">
+                        </a>
+                        <h4>Placa de sinalização</h4>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/co1.png" data-toggle="lightbox" data-gallery="multiimages" data-title="Aluguel de (Cochos)" class="img-thumbnail">
+                            <img src="~/img/co1.png" alt="" class="img-responsive">
+                        </a>
+                        <h4>Aluguel de (Cochos)</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/cb1.png" data-toggle="lightbox" data-gallery="multiimages" data-title="Tendas Chapéu de Bruxa" class="img-thumbnail">
+                            <img src="~/img/cb1.png" alt="" class="img-responsive">
+                        </a>
+                        <h4>Tendas Chapéu de Bruxa</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/pra1.png" data-toggle="lightbox" data-gallery="multiimages" data-title="Palco com rampa de acesso" data-footer="Big ass waterfall- using footer instead of title" class="img-thumbnail">
+                            <img src="~/img/pra1.png" alt="" class="img-responsive">
+                        </a>
+                        <h4>Palco com rampa de acesso</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/gd1.png" data-toggle="lightbox" data-gallery="multiimages" data-title="Grids Metálicos (Box truss)" data-footer="Now fill it with whiskey" class="img-thumbnail">
+                            <img src="~/img/gd1.png" alt="Grids Metálicos (Box truss)" class="img-responsive">
+                        </a>
+                        <h4>Grids Metálicos (Box truss)</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/sanfonada2.png" data-toggle="lightbox" data-gallery="multiimages" data-title="Tendas Sanfonadas" class="img-thumbnail">
+                            <img src="~/img/sanfonada2.png" alt="" class="img-responsive">
+                        </a>
+                        <h4>Tendas Sanfonadas</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/cb1.png" data-toggle="lightbox" data-gallery="multiimages" data-width="640" data-title="Tendas Chapéu de Bruxa" class="img-thumbnail">
+                            <img src="~/img/cb1.png" alt="Tendas Chapéu de Bruxa" class="img-responsive">
+                        </a>
+                        <h4>Tendas Chapéu de Bruxa</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="box">
+                        <a href="~/img/balcao-2.png" data-toggle="lightbox" data-gallery="multiimages" data-width="640" data-title="Balcão para eventos" class="img-thumbnail">
+                            <img src="~/img/balcao-2.png" alt="" class="img-responsive">
+                        </a>
+                        <h4>Balcão para eventos</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section id="sobre">
+    @Html.Partial("_SobreBotton")
+</section>
+
+@section scripts {
+    <link href="~/Content/ekko-lightbox.css" rel="stylesheet" />
+    <script src="~/Scripts/MyJS/ekko-lightbox.js"></script>
+    <script>
+        $(function () {
+            //Aqui q está o segredo! -> olhe no _Layout.cshtml o li li-mnu-Home
+            $("#li-mnu-Portifolio").addClass("active");
+        });
+
+        $(document).ready(function ($) {
+
+            // delegate calls to data-toggle="lightbox"
+            $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+                event.preventDefault();
+                return $(this).ekkoLightbox({
+                    onShown: function () {
+                        if (window.console) {
+                            return console.log('Checking our the events huh?');
+                        }
+                    }
+                });
+            });
+
+            //Programatically call
+            $('#open-image').click(function (e) {
+                e.preventDefault();
+                $(this).ekkoLightbox();
+            });
+            $('#open-youtube').click(function (e) {
+                e.preventDefault();
+                $(this).ekkoLightbox();
+            });
+        });
+    </script>
+}
+

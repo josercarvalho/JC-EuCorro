@@ -1,0 +1,8 @@
+COR DO FUNDO DO MUENU - ROXO
+background-color: #9b1ba6;
+
+background: #9b1ba6 !important;
+
+
+COR DO TITULO PAINEL - LARANJA
+background: #FF6600;

@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <center>
+                <figure>
+                    <img src="~/img/Logo-topo.jpg" alt="User Image" height="90" />
+                </figure>
+            </center>
+        </div>
+        <!-- search form -->
+        @*<form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search..." />
+                    <span class="input-group-btn">
+                        <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>*@
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+
+        @{
+            if (Request.IsAuthenticated)
+            {
+                <ul class="sidebar-menu">
+                    <li class="header">MENU PRINCIPAL</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li id="menu-cadastro" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-folder-open"></i> <span>Cadastros</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="submenu-Eventos"><a href="@Url.Action("Index", "Evento")"><i class="fa fa-circle-o"></i> Eventos </a></li>
+                                <li id="submenu-CodDesconto"><a href="@Url.Action("Index", "Desconto")"><i class="fa fa-circle-o"></i> Código de Descontos</a></li>
+
+                            </ul>
+                        </li>
+                        <li id="menu-tabelas" class="treeview">
+                            <a href="#">
+                                <i class="fa fa-table"></i> <span>Tabelas</span><i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li id="submenu-Modalidade"><a href="@Url.Action("Index", "Modalidade")"><i class="fa fa-circle-o"></i> Modalidades</a></li>
+                                <li id="submenu-EventoTipo"><a href="@Url.Action("Index", "TipoEvento")"><i class="fa fa-circle-o"></i> Tipos do Evento</a></li>
+                                <li id="submenu-Categorias"><a href="@Url.Action("Index", "Categoria")"><i class="fa fa-circle-o"></i> Categorias</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    <li id="menu-Atletas" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user-plus"></i><span>Atletas</span><i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="submenu-TodosAtletas"><a href="@Url.Action("index", "Atleta")"><i class="fa fa-circle-o"></i> Todos</a></li>
+                            <li id="submenu-Inscrever"><a href="@Url.Action("Blank", "Home")"><i class="fa fa-circle-o"></i> Inscrever Atleta</a></li>
+                            <li id="submenu-NumeroPeito"><a href="@Url.Action("Blank", "Home")"><i class="fa fa-circle-o"></i> Número do Peito</a></li>
+                            <li id="submenu-EntregaKit"><a href="@Url.Action("Blank", "Home")"><i class="fa fa-circle-o"></i> Entrega Kit</a></li>
+                        </ul>
+                    </li>
+
+                    @{
+                        var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+                        var claim = claimsIdentity.FindFirst(c => c.Type == "Admin");
+
+                        if (claim != null)
+                        {
+                            if (claim.Value == "True")
+                            {
+                                <li class="header">MENU PAINEL SITE</li>
+                                <li id="menu-WebSite" class="treeview">
+                                    <a href="#">
+                                        <i class="fa fa-sitemap"></i><span>WebSite</span><i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li id="submenu-parceiro">
+                                            <a href="@Url.Action("Index", "Parceiro")">
+                                                <i class="fa fa-bookmark"></i>
+                                                <span> Parceiros e Clientes</span>
+                                            </a>
+                                        </li>
+
+                                        <li id="submenu-galeria">
+                                            <a href="@Url.Action("Index", "Galeria")">
+                                                <i class="fa fa-book"></i>
+                                                <span>Galeria de Fotos</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="header">MENU ADMINISTRATIVO</li>
+                                <li id="menu-UserAdm" class="treeview">
+                                    <a href="#">
+                                        <i class="fa fa-users"></i><span>Usuários</span><i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li id="menu-usuario"><a href="@Url.Action("Index", "Usuario")"><i class="fa fa-user-secret text-aqua"></i><span> Usuários</span></a></li>
+                                        <li id="menu-usuario"><a href="@Url.Action("Index", "UsersAdmin")"><i class="fa fa-check-circle text-blue"></i><span> Admin Usuarios</span></a></li>
+                                        @*<li id="menu-admuser">@Html.ActionLink(" Admin Usuarios", "Index", "UsersAdmin", null, new { @class = "fa fa-circle-o" })</li>*@
+                                        <li id="menu-usuario"><a href="@Url.Action("Index", "ClaimsAdmin")"><i class="fa fa-sign-in text-lime"></i><span> Admin Acessos</span></a></li>
+                                        <li id="menu-admclains">@*@Html.ActionLink(" Admin Acessos", "Index", "ClaimsAdmin", null, new { @class = "fa fa-circle-o" })*@</li>
+                                        <li id="menu-pdv"><a href="@Url.Action("Index", "PDVAdmin")"><i class="fa fa-desktop text-yellow"></i> Ponto de Venda</a></li>
+                                        <li id="menu-pdvadmin"><a href="@Url.Action("AcessoPDV", "PDVAdmin")"><i class="fa fa-share-square text-aqua"></i> Acesso ao PDV</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+                        }
+        }
+    </section>
+    <!-- /.sidebar -->
+</aside>

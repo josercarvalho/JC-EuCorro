@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.Title = "Potifolio";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Portifolio/menu")
+}
+
+<div class="body-content-sub">
+    <h3 class="subtitle">PORTIFÓLIO</h3>
+    <section class="filter-section">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <div class="filter-container isotopeFilters">
+                    <ul class="list-inline filter">
+                        <li class="active"><a href="#" data-filter="*">TODOS </a><span>/</span></li>
+                        <li><a href="#" data-filter=".aluguel">ALUGUÉIS</a></li>
+                        <li><a href="#" data-filter=".service">SERVIÇOS</a><span>/</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-section port-col">
+        <div class="row">
+            <div class="isotopeContainer">
+
+                <div class="col-sm-3 isotopeSelector service">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-service" data-src="#triathlonID" href="javascript:;">
+                                <div class="zoom">
+                                    <img src="~/img/triathlon.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Triathlon</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector service">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-service" data-src="#moutainID" href="javascript:;">
+                                <div class="zoom">
+                                    <img src="~/img/moutain.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Moutain Bike (MTB)</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector service">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-service" data-src="#duathlonID" href="javascript:;">
+                                <div class="zoom">
+                                    <img src="~/img/duathlon.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Duathlon Terrestre</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector service">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-service" data-src="#corridaID" href="javascript:;">
+                                <div class="zoom">
+                                    <img src="~/img/corridaderua.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Corrida de Rua</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector service">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-service" data-src="#ciclismoEstradaID" href="javascript:;">
+                                <div class="zoom">
+                                    <img src="~/img/ciclismo.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Ciclismo de Estrada</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector service">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-service" data-src="#aguathlonID" href="javascript:;">
+                                <div class="zoom">
+                                    <img src="~/img/aguathlon.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Aquathlon</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector aluguel">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-aluguel" data-caption="Placa de sinalização" data-src="@Url.Content("~/img/pra3.png")" data-width="600" data-height="400">
+                                <div class="zoom">
+                                    <img src="~/img/pra3.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Placa de sinalização</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector aluguel">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-aluguel" data-caption="Aluguel de (Cochos)" data-src="@Url.Content("~/img/co1.png")" data-width="600" data-height="400">
+                                <div class="zoom">
+                                    <img src="~/img/co1.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Aluguel de (Cochos)</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector aluguel">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-aluguel" data-caption="Tendas Chapéu de Bruxa" data-src="@Url.Content("~/img/cb1.png")" data-width="600" data-height="400">
+                                <div class="zoom">
+                                    <img src="~/img/cb1.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Tendas Chapéu de Bruxa</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector aluguel">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-aluguel" data-caption="Palco com rampa de acesso" data-src="@Url.Content("~/img/pra1.png")" data-width="600" data-height="400">
+                                <div class="zoom">
+                                    <img src="~/img/pra1.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Palco com rampa de acesso</div>
+                        </figure>
+                    </article>
+                </div>
+
+                <div class="col-sm-3 isotopeSelector aluguel">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-aluguel" data-caption="Grids Metálicos (Box truss)" data-src="@Url.Content("~/img/gd1.png")" data-width="600" data-height="400">
+                                <div class="zoom">
+                                    <img src="~/img/gd1.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Grids Metálicos (Box truss)</div>
+                        </figure>
+                    </article>
+                </div>
+                
+                <div class="col-sm-3 isotopeSelector aluguel">
+                    <article class="">
+                        <figure class="box">
+                            <a data-fancybox="group-aluguel" data-caption="Balcão para eventos" data-src="@Url.Content("~/img/balcao-2.png")" data-width="600" data-height="400">
+                                <div class="zoom">
+                                    <img src="~/img/balcao-2.png" class="imgBox" />
+                                    <div class="zoom-icon"></div>
+                                </div>
+                            </a>
+                            <div class="article-title">Balcão para eventos</div>
+                        </figure>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+@Html.Partial("_Servicos")
+
+<section id="sobre">
+    @Html.Partial("_SobreBotton")
+</section>
+
+@section scripts {
+    <link href="~/Content/isotope.css" rel="stylesheet" />
+    <link href="~/Content/jquery.fancybox.min.css" rel="stylesheet" />
+    @Scripts.Render("~/isotope/css")
+    @Scripts.Render("~/isotope/js")
+
+}

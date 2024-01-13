@@ -1,0 +1,287 @@
+﻿@model EuCorro.MVC.Site.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Página Inicial";
+    var eucorroInstagram = "@eucorromais";
+    var imgBanner = Url.Content("~/Uploads/Banners/");
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Home/menu")
+}
+
+<div class="container-fluid body-content-sub">
+
+    <section id="header">
+        <div class="content-header">
+            <div id="col-esq" class="col-md-9">
+                @Html.Partial("_Carrocel")
+            </div>
+            <div id="col-dir" class="col-md-3">
+                @*<div class="btn-group btn-group-justified">
+                        <a class="btn btn-lg btn-warning" href="@Url.Action("Create", "Cadastro")">
+                            <h4 class="strong">CADASTRE-SE AQUI</h4>
+                            <h6>em menos de um minuto</h6>
+                        </a>
+                    </div>*@
+                <h3 class="subtitle">ULTIMOS RESULTADOS</h3>
+                <div class="btn-group btn-group-justified">
+                    @Html.ActionLink("CLIQUE AQUI ", "Resultados", "Home", null, new { @class = "btn btn-lg btn-oranger text-bold strong" })
+                </div>
+
+                <h3 class="subtitle">NOSSOS NÚMEROS </h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-info text-center">
+                                <h3 class="text-info strong">22642</h3>
+                                <h5 class="text-light-blue ">Inscrições realizadas</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-warning text-center">
+                                <h3 class="text-warning strong">10367</h3>
+                                <h5 class="text-light-blue strong">Atletas cadastrados</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="subtitle">REDES SOCIAIS</h3>
+                <h4 class="glyphicons glyphicons-social instagram">
+                    <i class="fa fa-instagram"></i>
+                    <a target="_blank" href="http://instagram.com/eucorromais/">@eucorroInstagram</a>
+                </h4>
+                <ul class="organizer-instagram-preview"></ul>
+                <h4 class="glyphicons glyphicons-social facebook">
+                    <i class="fa fa-facebook"></i>
+                    <a target="_blank" href="http://facebook.com/Eu%20Corro%20Eventos%20Esportivos/">/Eu Corro Eventos Esportivos</a>
+                </h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="proximosEventos">
+
+        <div class="content-wrapper">
+            <div class="col-md-12">
+                <h3 class="subtitle">PRÓXIMOS EVENTOS</h3>
+                @*<div class="linha_absolute"></div>*@
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    @foreach (var item in Model.ListaBanner)
+                    {
+                        if (@item.URL == null)
+                        {
+                            <div class="col-md-3">
+                                <div class="event-wrapper">
+                                    <div class="app-event-card-item app-card-shadow">
+                                        <div class="event-header">
+                                            @if (item.Previsao.Days <= 30)
+                                            {
+                                                <span>Em @item.Previsao.Days dias</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Em aproximadamente @item.Previsao.TotalDays mês</span>
+                                            }
+                                        </div>
+                                        <div class="event-banner">
+                                            <a target="_blank" href="@imgBanner@item.Banner"></a>
+                                        </div>
+                                        <div class="event-banner">
+                                            <a target="_blank" href="#">
+                                                <img alt="@item.Nome" src="@imgBanner@item.Banner">
+                                            </a>
+                                        </div>
+                                        <div class="event-infos">
+                                            <div class="strong event-name text-uppercase ellipsis">
+                                                <a href="#">@item.Nome</a>
+                                            </div>
+                                            <ul class="app-event-preview-infos">
+                                                <li><i class="fa fa-calendar fa-fw"></i> @item.DataEvento.ToShortDateString()</li>
+                                                <li><i class="fa fa-map-o fa-fw"></i> São Luís - MA</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="text-right">
+                <a class="btn btn-lg btn-oranger" href="@Url.Action("Index", "Evento")">Ver mais Eventos AQUI</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="parceiros" class="parceiros" style="width: 100%">
+        @*<div class="content-wrapper">*@
+            @Html.Partial("_Lateral", (Object)ViewBag.Parceiros)
+        @*</div>*@
+    </section>
+
+    <!-- Portifólio -->
+    <section id="portfolio" class="portfolio">
+        <div class="content-wrapper">
+            <div class="col-md-12">
+                <h3 class="subtitle">PORTIFÓLIO</h3>
+                @*<div class="linha_absolute"></div>*@
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="portfolio_content text-center wow fadeIn" data-wow-duration="5s">
+                        <div class="head_title text-center">
+                            <h2>Nosso Portifólio</h2>
+                        </div>
+                        <div class="col-md-6 wow bounceIn" data-wow-duration="6s" ">
+                            <h4>Alugúeis diversos</h4>
+                            <p>
+                                A Eu Corro trabalha com aluguéis de Tendas, Palcos, Gradis, Placa de Sinalização...
+                            </p>
+                            <a href="#" class="btn btn-oranger">Saiba mais</a>
+                        </div>
+
+                        <div class="col-md-6 wow bounceIn" data-wow-duration="6s" ">
+                            <h4>Nossos serviços</h4>
+                            <p>
+                                A Eu Corro, oferece diversos serviços na área esportiva, como: Duathlon, Triathlon, Ciclismo....
+                            </p>
+                            <a href="#" class="btn btn-oranger">Saiba mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+
+    @*<div class="content-wrapper">
+        <div class="col-md-9">
+
+            <h4 class="subtitle">CALENDÁRIO DE PROVAS</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Eventos e Provas Realizadas</div>
+                        <div class="panel-body">
+                            <p>...</p>
+                        </div>
+
+                        <!-- Table -->
+                        <table class="table">
+                            ...
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <h4 class="subtitle">NOSSOS ATLETAS</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-info">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Aniversariantes do Mês</div>
+                        <div class="panel-body">
+                            <p>...</p>
+                        </div>
+
+                        <!-- Table -->
+                        <table class="table">
+                            ...
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-info">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">
+                            Quem mais participou
+                        </div>
+                        <div class="panel-body">
+                            <p>...</p>
+                        </div>
+
+                        <!-- Table -->
+                        <table class="table">
+                            ...
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-3 clearfix">
+                @Html.Partial("_Lateral", (Object)ViewBag.Parceiros)
+            </div>
+    </div>*@
+</div>
+
+<section id="sobre">
+    @Html.Partial("_SobreBotton")
+</section>
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#myCarousel').on('slide.bs.carousel', function (event) {
+                $('.barra', this).removeClass('anima').css('width', '0%');
+            }).on('slid.bs.carousel', function (event) {
+                $('.barra', this).addClass('anima').css('width', '100%');
+            });
+
+            $('.barra', '#myCarousel').css('width', '100%');
+        });
+
+    </script>
+
+    @*<script>
+            $(function () {
+                //Aqui q está o segredo! -> olhe no _Layout.cshtml o li li-mnu-Home
+                $("#li-mnu-Home").addClass("active");
+            });
+        </script>
+
+        <script type="text/javascript">
+            // This code use https://github.com/whizzzkid/instagram-reverse-proxy api to access instagram public photos without userid
+            $(function () {
+                userName = "eucorromais",
+                num_photos = 12;
+
+                $.ajax({
+                    url: 'https://igapi.ga/' + userName + '/media/?count=' + num_photos,
+                    dataType: 'jsonp',
+                    type: 'GET',
+                    success: function (data) {
+                        for (x in data.items) {
+                            $('ul.organizer-instagram-preview').append('<li><img src="' + data.items[x].images.standard_resolution.url + '"></li>');
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.4&appId=1417158085183612";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>*@
+}
